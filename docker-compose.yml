@@ -1,0 +1,120 @@
+services:
+  api-gateway:
+    build: ./api
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./api/.env
+
+  auth-service:
+    build: ./services/auth_service
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./services/auth_service/.env
+    depends_on:
+      - mongo
+
+  customer-service:
+    build: ./services/customer_service
+    ports:
+      - "3001:3000"
+    env_file:
+      - ./services/customer_service/.env
+    depends_on:
+      - mongo
+
+  coupon-service:
+    build: ./services/coupon_service
+    ports:
+      - "3002:3000"
+    env_file:
+      - ./services/coupon_service/.env
+    depends_on:
+      - mongo
+
+  email-service:
+    build: ./services/email_service
+    ports:
+      - "3003:3000"
+    env_file:
+      - ./services/email_service/.env
+    depends_on:
+      - mongo
+
+  order-service:
+    build: ./services/order_service
+    ports:
+      - "3005:3000"
+    env_file:
+      - ./services/order_service/.env
+    depends_on:
+      - mongo
+
+  product-service:
+    build: ./services/product_service
+    ports:
+      - "3006:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGO_URI=mongodb://root:example@mongo:27017/product_db?authSource=admin
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+  registration-manager:
+    build: ./managers/registration_manager
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./managers/registration_manager/.env
+
+  checkout-manager:
+    build: ./managers/checkout_manager
+    ports:
+      - "4001:4000"
+    env_file:
+      - ./managers/checkout_manager/.env
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    command: http checkout-manager:4000
+    ports:
+      - "4040:4040"
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    depends_on:
+      - checkout-manager
+
+  product-analysis-manager:
+    build: ./managers/product_analysis_manager
+    ports:
+      - "4002:4000"
+    env_file:
+      - ./managers/product_analysis_manager/.env
+
+  mongo:
+    image: mongo:7
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/?authSource=admin
+      ME_CONFIG_BASICAUTH_ENABLED: true
+      ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
+      ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass
+    
+volumes:
+  mongo_data:

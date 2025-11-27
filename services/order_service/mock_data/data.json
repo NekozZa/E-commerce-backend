@@ -1,0 +1,376 @@
+[
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-02-18T12:35:00.000Z",
+    "totalMoney": 120,
+    "items": [
+      { "productId": "prod1", "quantity": 2 },
+      { "productId": "prod2", "quantity": 1 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-07-10T09:20:00.000Z",
+    "totalMoney": 95,
+    "items": [
+      { "productId": "prod3", "quantity": 3 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-09-12T18:45:00.000Z",
+    "totalMoney": 180,
+    "items": [
+      { "productId": "prod1", "quantity": 2 },
+      { "productId": "prod3", "quantity": 2 },
+      { "productId": "prod5", "quantity": 1 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-03-25T11:10:00.000Z",
+    "totalMoney": 65,
+    "items": [
+      { "productId": "prod4", "quantity": 1 },
+      { "productId": "prod2", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-01-15T14:50:00.000Z",
+    "totalMoney": 210,
+    "items": [
+      { "productId": "prod1", "quantity": 3 },
+      { "productId": "prod3", "quantity": 2 },
+      { "productId": "prod4", "quantity": 1 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-06-22T16:30:00.000Z",
+    "totalMoney": 90,
+    "items": [
+      { "productId": "prod5", "quantity": 3 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-12-10T08:15:00.000Z",
+    "totalMoney": 150,
+    "items": [
+      { "productId": "prod2", "quantity": 2 },
+      { "productId": "prod3", "quantity": 3 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-02-18T13:05:00.000Z",
+    "totalMoney": 80,
+    "items": [
+      { "productId": "prod4", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-08-20T19:20:00.000Z",
+    "totalMoney": 240,
+    "items": [
+      { "productId": "prod1", "quantity": 4 },
+      { "productId": "prod2", "quantity": 2 },
+      { "productId": "prod5", "quantity": 1 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-11-03T10:40:00.000Z",
+    "totalMoney": 60,
+    "items": [
+      { "productId": "prod3", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-05-05T12:15:00.000Z",
+    "totalMoney": 135,
+    "items": [
+      { "productId": "prod2", "quantity": 3 },
+      { "productId": "prod4", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-07-18T14:30:00.000Z",
+    "totalMoney": 75,
+    "items": [
+      { "productId": "prod5", "quantity": 3 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-04-25T09:50:00.000Z",
+    "totalMoney": 200,
+    "items": [
+      { "productId": "prod1", "quantity": 2 },
+      { "productId": "prod3", "quantity": 4 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-08-12T17:40:00.000Z",
+    "totalMoney": 90,
+    "items": [
+      { "productId": "prod2", "quantity": 2 },
+      { "productId": "prod4", "quantity": 1 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-11-30T15:25:00.000Z",
+    "totalMoney": 160,
+    "items": [
+      { "productId": "prod1", "quantity": 3 },
+      { "productId": "prod5", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-01-22T11:35:00.000Z",
+    "totalMoney": 85,
+    "items": [
+      { "productId": "prod3", "quantity": 1 },
+      { "productId": "prod4", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-03-17T10:10:00.000Z",
+    "totalMoney": 120,
+    "items": [
+      { "productId": "prod2", "quantity": 2 },
+      { "productId": "prod5", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-04-28T16:50:00.000Z",
+    "totalMoney": 60,
+    "items": [
+      { "productId": "prod1", "quantity": 1 },
+      { "productId": "prod3", "quantity": 1 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-12-15T14:05:00.000Z",
+    "totalMoney": 190,
+    "items": [
+      { "productId": "prod2", "quantity": 3 },
+      { "productId": "prod3", "quantity": 3 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-10-01T13:20:00.000Z",
+    "totalMoney": 95,
+    "items": [
+      { "productId": "prod4", "quantity": 1 },
+      { "productId": "prod5", "quantity": 3 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-03-05T12:45:00.000Z",
+    "totalMoney": 140,
+    "items": [
+      { "productId": "prod1", "quantity": 2 },
+      { "productId": "prod2", "quantity": 2 },
+      { "productId": "prod4", "quantity": 1 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-06-21T15:30:00.000Z",
+    "totalMoney": 75,
+    "items": [
+      { "productId": "prod3", "quantity": 3 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-08-11T09:50:00.000Z",
+    "totalMoney": 205,
+    "items": [
+      { "productId": "prod1", "quantity": 3 },
+      { "productId": "prod5", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-09-30T11:40:00.000Z",
+    "totalMoney": 60,
+    "items": [
+      { "productId": "prod2", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-01-09T17:15:00.000Z",
+    "totalMoney": 180,
+    "items": [
+      { "productId": "prod3", "quantity": 3 },
+      { "productId": "prod4", "quantity": 3 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-11-22T10:25:00.000Z",
+    "totalMoney": 105,
+    "items": [
+      { "productId": "prod1", "quantity": 2 },
+      { "productId": "prod5", "quantity": 1 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-05-13T14:35:00.000Z",
+    "totalMoney": 95,
+    "items": [
+      { "productId": "prod2", "quantity": 3 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-10-18T16:10:00.000Z",
+    "totalMoney": 220,
+    "items": [
+      { "productId": "prod1", "quantity": 4 },
+      { "productId": "prod3", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-06-03T09:45:00.000Z",
+    "totalMoney": 80,
+    "items": [
+      { "productId": "prod4", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-08-29T12:20:00.000Z",
+    "totalMoney": 195,
+    "items": [
+      { "productId": "prod1", "quantity": 3 },
+      { "productId": "prod2", "quantity": 3 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-07-15T18:05:00.000Z",
+    "totalMoney": 140,
+    "items": [
+      { "productId": "prod3", "quantity": 2 },
+      { "productId": "prod5", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-03-28T11:30:00.000Z",
+    "totalMoney": 90,
+    "items": [
+      { "productId": "prod2", "quantity": 2 },
+      { "productId": "prod4", "quantity": 1 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-02-11T14:55:00.000Z",
+    "totalMoney": 160,
+    "items": [
+      { "productId": "prod1", "quantity": 3 },
+      { "productId": "prod3", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-09-21T10:05:00.000Z",
+    "totalMoney": 75,
+    "items": [
+      { "productId": "prod4", "quantity": 3 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-05-19T13:40:00.000Z",
+    "totalMoney": 130,
+    "items": [
+      { "productId": "prod2", "quantity": 2 },
+      { "productId": "prod5", "quantity": 2 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-12-05T15:25:00.000Z",
+    "totalMoney": 180,
+    "items": [
+      { "productId": "prod1", "quantity": 2 },
+      { "productId": "prod3", "quantity": 4 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2025-02-08T12:15:00.000Z",
+    "totalMoney": 95,
+    "items": [
+      { "productId": "prod2", "quantity": 2 },
+      { "productId": "prod4", "quantity": 1 }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "692597c710dc9cbe999ef7b3",
+    "purchaseDate": "2024-09-25T17:40:00.000Z",
+    "totalMoney": 200,
+    "items": [
+      { "productId": "prod1", "quantity": 3 },
+      { "productId": "prod3", "quantity": 3 }
+    ],
+    "status": "Paid"
+  }
+]
