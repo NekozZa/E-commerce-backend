@@ -24,213 +24,179 @@ function generateCombinations(optionGroups) {
   }
   return results;
 }
-async function buildVariantPCFromCombination(basePC, combo) {
-  // Lấy thông tin products gốc từ basePC.components (_id, name)
-  const baseProducts = await Product.find({
-    _id: { $in: basePC.components.map((c) => c._id) }, // lấy id thôi
-  });
+// async function buildVariantPCFromCombination(basePC, combo) {
+//   // Lấy thông tin products gốc từ basePC.components (_id, name)
+//   const baseProducts = await Product.find({
+//     _id: { $in: basePC.components.map((c) => c._id) }, // lấy id thôi
+//   });
 
-  // Build finalComponents với object { _id, name } từ basePC
-  const finalComponents = baseProducts.map((p) => ({
-    _id: p._id,
-    name: p.name,
-  }));
+//   // Build finalComponents với object { _id, name } từ basePC
+//   const finalComponents = baseProducts.map((p) => ({
+//     _id: p._id,
+//     name: p.name,
+//   }));
 
-  // Thay thế theo combo
-  for (const override of combo) {
-    const prod = await Product.findById(override.productId);
-    const index = finalComponents.findIndex((c) =>
-      baseProducts
-        .find((bp) => bp.componentType === override.type)
-        ?._id.equals(c._id)
-    );
+//   // Thay thế theo combo
+//   for (const override of combo) {
+//     const prod = await Product.findById(override.productId);
+//     const index = finalComponents.findIndex((c) =>
+//       baseProducts
+//         .find((bp) => bp.componentType === override.type)
+//         ?._id.equals(c._id)
+//     );
 
-    if (index !== -1) {
-      finalComponents[index] = { _id: prod._id, name: prod.name };
-    } else {
-      finalComponents.push({ _id: prod._id, name: prod.name });
-    }
-  }
+//     if (index !== -1) {
+//       finalComponents[index] = { _id: prod._id, name: prod.name };
+//     } else {
+//       finalComponents.push({ _id: prod._id, name: prod.name });
+//     }
+//   }
 
-  const totalPrice = await calculateTotalPrice(
-    finalComponents.map((c) => c._id)
-  );
+//   const totalPrice = await calculateTotalPrice(
+//     finalComponents.map((c) => c._id)
+//   );
 
-  const variantPC = new Computer({
-    name: `${basePC.name} - ${combo.map((c) => c.type).join(" + ")}`,
-    baseName: basePC.baseName,
-    brand: basePC.brand,
-    images: basePC.images,
-    description: basePC.description,
-    inventory: basePC.inventory,
-    productType: "Computer",
-    components: finalComponents, // <- đây sẽ có cả name
-    totalPrice,
-    variants: [],
-    variantId: basePC._id,
-  });
+//   const variantPC = new Computer({
+//     name: `${basePC.name} - ${combo.map((c) => c.type).join(" + ")}`,
+//     baseName: basePC.baseName,
+//     brand: basePC.brand,
+//     images: basePC.images,
+//     description: basePC.description,
+//     inventory: basePC.inventory,
+//     productType: "Computer",
+//     components: finalComponents, // <- đây sẽ có cả name
+//     totalPrice,
+//     variants: [],
+//     variantId: basePC._id,
+//   });
 
-  return variantPC;
-}
+//   return variantPC;
+// }
 // createProduct (controller)
-exports.createProduct = async (req, res) => {
-  try {
-    const { productType } = req.body;
+// exports.createProduct = async (req, res) => {
+//   try {
+//     const { productType } = req.body;
 
-    // COMPONENT
-    if (productType === "Component") {
-      const newComponent = new Component(req.body);
-      await newComponent.save();
-      return res.status(201).json(newComponent);
-    }
+//     // COMPONENT
+//     if (productType === "Component") {
+//       const newComponent = new Component(req.body);
+//       await newComponent.save();
+//       return res.status(201).json(newComponent);
+//     }
 
-    // COMPUTER
-    if (productType === "Computer") {
-      const { components, optionGroups } = req.body;
+//     // COMPUTER
+//     if (productType === "Computer") {
+//       const { components, optionGroups } = req.body;
 
-      // Lấy thông tin base products từ components (mảng id)
-      const baseProducts = await Product.find({ _id: { $in: components } });
+//       // Lấy thông tin base products từ components (mảng id)
+//       const baseProducts = await Product.find({ _id: { $in: components } });
 
-      // Map ra baseComponents { _id, name }
-      const baseComponents = baseProducts.map((p) => ({
-        _id: p._id,
-        name: p.name,
-      }));
+//       // Map ra baseComponents { _id, name }
+//       const baseComponents = baseProducts.map((p) => ({
+//         _id: p._id,
+//         name: p.name,
+//       }));
 
-      // Tính giá base PC
-      const baseTotal = await calculateTotalPrice(components);
+//       // Tính giá base PC
+//       const baseTotal = await calculateTotalPrice(components);
 
-      // Tạo basePC (chưa có variants)
-      const basePC = new Computer({
-        name: req.body.name,
-        baseName: req.body.baseName,
-        brand: req.body.brand,
-        images: req.body.images,
-        description: req.body.description,
-        inventory: req.body.inventory,
-        productType: "Computer",
-        components: baseComponents,
-        totalPrice: baseTotal,
-        variants: [],
-        variantId: null,
-      });
+//       // Tạo basePC (chưa có variants)
+//       const basePC = new Computer({
+//         name: req.body.name,
+//         baseName: req.body.baseName,
+//         brand: req.body.brand,
+//         images: req.body.images,
+//         description: req.body.description,
+//         inventory: req.body.inventory,
+//         productType: "Computer",
+//         components: baseComponents,
+//         totalPrice: baseTotal,
+//         variants: [],
+//         variantId: null,
+//       });
 
-      await basePC.save();
+//       await basePC.save();
 
-      let createdVariants = [];
-      const skippedCombos = []; // lưu combo bị skip và lý do
+//       let createdVariants = [];
+//       const skippedCombos = []; // lưu combo bị skip và lý do
 
-      // Nếu có optionGroups → tạo tất cả combination
-      if (Array.isArray(optionGroups) && optionGroups.length > 0) {
-        const combos = generateCombinations(optionGroups);
+//       // Nếu có optionGroups → tạo tất cả combination
+//       if (Array.isArray(optionGroups) && optionGroups.length > 0) {
+//         const combos = generateCombinations(optionGroups);
 
-        for (const combo of combos) {
-          // Nếu combo rỗng (không option do tất cả null) -> skip
-          if (!Array.isArray(combo) || combo.length === 0) {
-            skippedCombos.push({ combo, reason: "Empty combo (no options)" });
-            continue;
-          }
+//         for (const combo of combos) {
+//           // Nếu combo rỗng (không option do tất cả null) -> skip
+//           if (!Array.isArray(combo) || combo.length === 0) {
+//             skippedCombos.push({ combo, reason: "Empty combo (no options)" });
+//             continue;
+//           }
 
-          // TÙY CHỌN: bỏ qua combo có cùng productId lặp (ví dụ chọn cùng sản phẩm cho 2 loại)
-          const comboIds = combo.map((c) => String(c.productId));
-          if (new Set(comboIds).size !== comboIds.length) {
-            skippedCombos.push({
-              combo,
-              reason: "Duplicate productId selected within combo",
-            });
-            continue;
-          }
+//           // TÙY CHỌN: bỏ qua combo có cùng productId lặp (ví dụ chọn cùng sản phẩm cho 2 loại)
+//           const comboIds = combo.map((c) => String(c.productId));
+//           if (new Set(comboIds).size !== comboIds.length) {
+//             skippedCombos.push({
+//               combo,
+//               reason: "Duplicate productId selected within combo",
+//             });
+//             continue;
+//           }
 
-          // Build variant (gọi hàm đã có)
-          let variantPC;
-          try {
-            variantPC = await buildVariantPCFromCombination(basePC, combo);
-          } catch (err) {
-            // Nếu build lỗi, skip và ghi lý do
-            skippedCombos.push({
-              combo,
-              reason: "Error building variant: " + err.message,
-            });
-            continue;
-          }
+//           // Build variant (gọi hàm đã có)
+//           let variantPC;
+//           try {
+//             variantPC = await buildVariantPCFromCombination(basePC, combo);
+//           } catch (err) {
+//             // Nếu build lỗi, skip và ghi lý do
+//             skippedCombos.push({
+//               combo,
+//               reason: "Error building variant: " + err.message,
+//             });
+//             continue;
+//           }
 
-          // Kiểm tra trùng id trong final components của variant (nếu có -> skip)
-          const compIds = variantPC.components.map((c) => String(c._id));
-          if (new Set(compIds).size !== compIds.length) {
-            skippedCombos.push({
-              combo,
-              reason: "Final variant components contain duplicate product IDs",
-              finalComponentIds: compIds,
-            });
-            continue;
-          }
+//           // Kiểm tra trùng id trong final components của variant (nếu có -> skip)
+//           const compIds = variantPC.components.map((c) => String(c._id));
+//           if (new Set(compIds).size !== compIds.length) {
+//             skippedCombos.push({
+//               combo,
+//               reason: "Final variant components contain duplicate product IDs",
+//               finalComponentIds: compIds,
+//             });
+//             continue;
+//           }
 
-          // Nếu mọi thứ ok thì lưu variant và thêm vào basePC.variants
-          await variantPC.save();
+//           // Nếu mọi thứ ok thì lưu variant và thêm vào basePC.variants
+//           await variantPC.save();
 
-          basePC.variants.push({
-            name: variantPC.name,
-            overrides: combo.map((c) => c.productId),
-            totalPrice: variantPC.totalPrice,
-          });
+//           basePC.variants.push({
+//             name: variantPC.name,
+//             overrides: combo.map((c) => c.productId),
+//             totalPrice: variantPC.totalPrice,
+//           });
 
-          createdVariants.push(variantPC);
-        }
+//           createdVariants.push(variantPC);
+//         }
 
-        // Lưu basePC sau khi đã push variants hợp lệ
-        await basePC.save();
-      }
+//         // Lưu basePC sau khi đã push variants hợp lệ
+//         await basePC.save();
+//       }
 
-      return res.status(201).json({
-        message: "Base PC created. Variants processed.",
-        basePC,
-        variants: createdVariants,
-        skippedCombos, // trả về để biết lý do skip
-      });
-    }
+//       return res.status(201).json({
+//         message: "Base PC created. Variants processed.",
+//         basePC,
+//         variants: createdVariants,
+//         skippedCombos, // trả về để biết lý do skip
+//       });
+//     }
 
-    // DEFAULT PRODUCT
-    const newProduct = new Product(req.body);
-    await newProduct.save();
-    return res.status(201).json(newProduct);
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
-  }
-};
-
-exports.getProductById = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    // PC gốc
-    const baseProducts = await Computer.findById(id)
-      .populate("components", "_id name")
-      .lean();
-
-    if (!baseProducts) {
-      return res.status(404).json({ error: "Computer not found" });
-    }
-
-    // PC variant thật trong DB
-    const variants = await Computer.find({ variantId: id })
-      .populate("components", "_id name")
-      .lean();
-    const mapComponents = (arr) =>
-      arr.map((c) => ({
-        _id: c._id,
-        name: c.name || "",
-      }));
-
-    baseProducts.components = mapComponents(baseProducts.components);
-    variants.forEach((v) => (v.components = mapComponents(v.components)));
-    return res.json({
-      baseProducts,
-      variants,
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
+//     // DEFAULT PRODUCT
+//     const newProduct = new Product(req.body);
+//     await newProduct.save();
+//     return res.status(201).json(newProduct);
+//   } catch (error) {
+//     return res.status(400).json({ message: error.message });
+//   }
+// };
 // buildVariantPCFromCombination.js
 async function buildVariantPCFromCombination1(basePC, combo) {
   // Lấy baseProducts đầy đủ từ DB
@@ -584,49 +550,6 @@ function removeVietnameseTones(str) {
     .replace(/đ/g, "d")
     .replace(/Đ/g, "D");
 }
-// exports.getVariantByChanged = async (req, res) => {
-//   try {
-//     const basePCId = req.params.id;
-//     const { changed = [] } = req.body;
-
-//     const basePC = await Computer.findById(basePCId).lean();
-//     const variantPro = await Computer.find(basePCId).lean();
-//     if (!basePC) return res.status(404).json({ message: "Base PC not found" });
-//     if(basePC._id)
-//     // Lấy ID các component cuối cùng
-//     const finalComponentIds = basePC.components.map((c) => c._id.toString());
-
-//     // Thay thế/ thêm component từ changed
-//     changed.forEach((id) => {
-//       const index = finalComponentIds.findIndex((c) => c === id);
-//       if (index === -1) finalComponentIds.push(id);
-//       else finalComponentIds[index] = id;
-//     });
-
-//     // Lấy dữ liệu chi tiết component
-//     const finalComponents = await Product.find({
-//       _id: { $in: finalComponentIds },
-//     });
-
-//     // Tính tổng giá
-//     const totalPrice = finalComponents.reduce(
-//       (sum, c) => sum + (c.price || 0),
-//       0
-//     );
-
-//     // Trả về product
-//     return res.json({
-//       product: {
-//         ...basePC,
-//         components: finalComponents,
-//         totalPrice,
-//         changed,
-//       },
-//     });
-//   } catch (err) {
-//     return res.status(400).json({ message: err.message });
-//   }
-// };
 exports.getVariantByChanged = async (req, res) => {
   try {
     const basePCId = req.params.id;
@@ -656,5 +579,46 @@ exports.getVariantByChanged = async (req, res) => {
     });
   } catch (err) {
     return res.status(400).json({ error: err.message });
+  }
+};
+exports.getProductById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // 1️⃣ Tìm product bất kỳ trong collection Product
+    const product = await Product.findById(id).lean();
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    // 2️⃣ Nếu là Computer, lấy components chi tiết + variants
+    if (product.productType === "Computer") {
+      const basePC = await Computer.findById(id).populate("components").lean();
+
+      // Lấy các variant của Computer
+      const variants = await Computer.find({ variantId: id })
+        .populate("components")
+        .lean();
+
+      const mapComponents = (arr) =>
+        arr.map((c) => ({
+          _id: c._id,
+          name: c.name || "",
+          price: c.price || 0,
+        }));
+
+      basePC.components = mapComponents(basePC.components);
+      variants.forEach((v) => (v.components = mapComponents(v.components)));
+
+      return res.json({
+        product: basePC,
+        variants,
+      });
+    }
+
+    // 3️⃣ Nếu là Component, trả về luôn
+    return res.json({ product });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
