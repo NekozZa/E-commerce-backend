@@ -15,8 +15,10 @@ const auth = (req, res, next) => {
      
     else {
         try {
-            jwt.verify(token, JWT_LOGIN_SECRET)
+            const payload = jwt.verify(token, JWT_LOGIN_SECRET)
             req.token = token
+            req.payload = payload
+            
             next()
         } catch {
             res.status(401).json({error: "Invalid credentials"})

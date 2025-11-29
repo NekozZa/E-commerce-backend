@@ -53,12 +53,12 @@ const addOrders = async () => {
 }
 
 const addOrder = (req, res) => {
-    const { deliveryAddress, totalMoney, items, couponId } = req.body
+    const { deliveryAddress, totalMoney, items, couponId, loyaltyPoint = undefined } = req.body
     const expiredDate = new Date(Date.now() + EXPIRY * 60 * 1000)
     const authHeader = req.headers.authorization
     const token = authHeader.split(' ')[1]
 
-    var order = { deliveryAddress, expiredDate, totalMoney, items, couponId }
+    var order = { deliveryAddress, expiredDate, totalMoney, items, couponId, loyaltyPoint }
 
     if (token) {
         try {

@@ -45,6 +45,10 @@ const orderSchema = mongoose.Schema({
         ref: 'Coupon',
     },
 
+    loyaltyPoint: {
+        type: Number
+    },
+
     status: {
         type: String,
         enum: ['Pending', 'Paid', 'On the way', 'Delivered'],

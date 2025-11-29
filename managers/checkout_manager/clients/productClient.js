@@ -13,6 +13,22 @@ const getProduct = async (productId) => {
     }
 }
 
+const updateProduct = async (productId, inventory) => {
+    try {
+        const productResponse = await axios.patch(`${PRODUCT_SERVICE_ROOT}/products/${productId}`, {
+            inventory: inventory
+        })
+
+        const product = productResponse.data
+        return product
+    }
+
+    catch (err) {
+        throw err
+    }
+}
+
 module.exports = {
-    getProduct
+    getProduct,
+    updateProduct
 }

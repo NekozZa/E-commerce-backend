@@ -156,13 +156,13 @@ app.put('/customers/:id', validateInfo, async (req, res) => {
     }
 
     const dryrun = req.query.dryrun
-    const { fullName, addresses } = req.body
+    const { fullName, addresses, loyaltyPoint } = req.body
 
     if (dryrun) {
-        return res.json({fullName, addresses})
+        return res.json({fullName, addresses })
     }
 
-    await Customer.updateOne({ _id: id }, { fullname: fullName, addresses })
+    await Customer.updateOne({ _id: id }, { fullname: fullName, addresses, loyaltyPoint })
     res.status(200).json({message: "Successfully updated"})
 })
 

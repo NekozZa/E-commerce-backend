@@ -2,12 +2,12 @@ const axios = require('axios')
 
 const ORDER_SERVICE_ROOT = process.env.ORDER_SERVICE_ROOT
 
-const createOrder = async (token, deliveryAddress, totalMoney, items, couponId) => {
+const createOrder = async (token, deliveryAddress, totalMoney, items, couponId, loyaltyPoint) => {
     try {
         const orderResponse = await axios.post(`${ORDER_SERVICE_ROOT}/orders`, 
             {
                 deliveryAddress: deliveryAddress, totalMoney: totalMoney,
-                items: items, couponId: couponId 
+                items: items, couponId: couponId, loyaltyPoint: loyaltyPoint
             },
 
             { 'headers': { 'Authorization': `Bearer ${token}` } }
