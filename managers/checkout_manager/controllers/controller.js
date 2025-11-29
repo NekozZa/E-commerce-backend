@@ -14,10 +14,12 @@ const checkoutOrder = async (token, ipAddress, callbackURL, deliveryAddress, ite
         var totalMoney = 0
         
         for (var i = 0; i < items.length; i++) {
-            const { productId, price, quantity } = items[i]
-            // const product = await productClient.getProduct(productId)
+            const { productId, quantity } = items[i]
+            const product = await productClient.getProduct(productId)
 
-            totalMoney += price * quantity
+            console.log(product)
+
+            totalMoney += product.price * quantity
         }
 
         if (couponId) {
