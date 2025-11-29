@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/products", productRoutes);
 app.use("/carts", cartRoutes);
-
+app.use("/uploads", express.static("uploads"));
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {

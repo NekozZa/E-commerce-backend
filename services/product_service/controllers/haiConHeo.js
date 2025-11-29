@@ -261,6 +261,14 @@ async function buildVariantPCFromCombination1(basePC, combo) {
 // createProduct controller
 exports.createProduct1 = async (req, res) => {
   try {
+    const BASE_URL = `${req.protocol}://${req.get("host")}`;
+    const normalizeImages = (images) => {
+      return (images || []).map((img) =>
+        img.startsWith("http") ? img : `${BASE_URL}/uploads/${img}`
+      );
+    };
+
+    req.body.images = normalizeImages(req.body.images);
     const { productType } = req.body;
 
     if (productType === "Component") {

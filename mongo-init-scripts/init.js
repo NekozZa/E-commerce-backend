@@ -1,623 +1,457 @@
 // dbInit.js
-db = db.getSiblingDB("product_test");
+db = db.getSiblingDB("products");
 
-let products = [{
-  "_id": {
-    "$oid": "6921794fd37aef91e9063b97"
+let products = [
+  {
+    _id: ObjectId("6921794fd37aef91e9063b97"),
+    name: "Intel i5 12400F",
+    brand: "Intel",
+    price: 3800000,
+    inventory: 10,
+    images: [
+      "http://localhost:3000/uploads/intel-corei5-12400F_1.jpg",
+      "http://localhost:3000/uploads/intel-corei5-12400F_2.jpg",
+      "http://localhost:3000/uploads/intel-corei5-12400F_3.jpg",
+    ],
+    productType: "Component",
+    componentType: "cpu",
+    specs: { socket: "LGA1700", cores: 6, threads: 12 },
+    createdAt: ISODate("2025-11-22T08:50:23.008Z"),
+    updatedAt: ISODate("2025-11-29T04:37:54.537Z"),
+    __v: 0,
   },
-  "name": "Intel i5 12400F",
-  "brand": "Intel",
-  "price": 3800000,
-  "inventory": 10,
-  "images": [
-    "http://localhost:3000/uploads/intel-corei5-12400F_1.jpg",
-    "http://localhost:3000/uploads/intel-corei5-12400F_2.jpg",
-    "http://localhost:3000/uploads/intel-corei5-12400F_3.jpg"
-  ],
-  "productType": "Component",
-  "componentType": "cpu",
-  "specs": {
-    "socket": "LGA1700",
-    "cores": 6,
-    "threads": 12
-  },
-  "createdAt": {
-    "$date": "2025-11-22T08:50:23.008Z"
-  },
-  "updatedAt": {
-    "$date": "2025-11-29T04:37:54.537Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6922c705c9e0de915584a818"
-  },
-  "name": "Intel Core i7-12700K",
-  "brand": "Intel",
-  "price": 9500000,
-  "inventory": 20,
-  "images": [
-    "http://localhost:3000/uploads/intel-corei7-12700K_1.jpg",
-    "http://localhost:3000/uploads/intel-corei7-12700K_2.jpg",
-    "http://localhost:3000/uploads/intel-corei7-12700K_3.jpg"
-  ],
-  "description": "CPU mạnh cho gaming và làm việc",
-  "productType": "Component",
-  "componentType": "cpu",
-  "specs": {
-    "cores": 12,
-    "threads": 20,
-    "baseClock": "3.6GHz",
-    "boostClock": "5.0GHz",
-    "tdp": "125W"
-  },
-  "createdAt": {
-    "$date": "2025-11-23T08:34:13.048Z"
-  },
-  "updatedAt": {
-    "$date": "2025-11-29T04:38:55.829Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6922c71ac9e0de915584a81a"
-  },
-  "name": "Samsung 980 1TB NVMe",
-  "brand": "Samsung",
-  "price": 2500000,
-  "inventory": 30,
-  "images": [
-    "http://localhost:3000/uploads/samsung980_1.jpg",
-    "http://localhost:3000/uploads/samsung980_2.jpg",
-    "http://localhost:3000/uploads/samsung980_3.jpg"
-  ],
-  "description": "SSD NVMe 1TB tốc độ cao",
-  "productType": "Component",
-  "componentType": "ssd",
-  "specs": {
-    "capacity": "1TB",
-    "interface": "NVMe",
-    "readSpeed": "3500MB/s",
-    "writeSpeed": "3000MB/s"
-  },
-  "createdAt": {
-    "$date": "2025-11-23T08:34:34.758Z"
-  },
-  "updatedAt": {
-    "$date": "2025-11-29T04:41:53.897Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6923e94123c33dfcf314142d"
-  },
-  "name": "Kingston Fury Beast 16GB DDR4",
-  "brand": "Kingston",
-  "price": 900000,
-  "inventory": 100,
-  "images": [
-    "http://localhost:3000/uploads/furybeast16gb_1.jpg",
-    "http://localhost:3000/uploads/furybeast16gb_2.jpg",
-    "http://localhost:3000/uploads/furybeast16gb_3.jpg"
-  ],
-  "description": "RAM DDR4 16GB bus 3200MHz.",
-  "productType": "Component",
-  "componentType": "ram",
-  "specs": {
-    "capacity": "16GB",
-    "type": "DDR4",
-    "speed": "3200MHz"
-  },
-  "createdAt": {
-    "$date": "2025-11-24T05:12:33.283Z"
-  },
-  "updatedAt": {
-    "$date": "2025-11-29T04:54:42.954Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6923e95123c33dfcf314142f"
-  },
-  "name": "ASUS Prime B660M-A",
-  "brand": "ASUS",
-  "price": 2200000,
-  "inventory": 40,
-  "images": [
-    "http://localhost:3000/uploads/B660M_1.jpg",
-    "http://localhost:3000/uploads/B660M_2.jpg",
-    "http://localhost:3000/uploads/B660M_3.jpg"
-  ],
-  "description": "Mainboard hỗ trợ Intel thế hệ 12.",
-  "productType": "Component",
-  "componentType": "mainboard",
-  "specs": {
-    "socket": "LGA1700",
-    "chipset": "B660",
-    "formFactor": "mATX",
-    "memorySupport": "DDR4"
-  },
-  "createdAt": {
-    "$date": "2025-11-24T05:12:49.156Z"
-  },
-  "updatedAt": {
-    "$date": "2025-11-29T04:52:59.801Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6923e95923c33dfcf3141431"
-  },
-  "name": "Cooler Master MWE 650W",
-  "brand": "Cooler Master",
-  "price": 1200000,
-  "inventory": 60,
-  "images": [
-    "http://localhost:3000/uploads/mwe_1.jpg",
-    "http://localhost:3000/uploads/mwe_2.jpg",
-    "http://localhost:3000/uploads/mwe_3.jpg"
-  ],
-  "description": "Nguồn công suất 650W chuẩn 80 Plus Bronze.",
-  "productType": "Component",
-  "componentType": "psu",
-  "specs": {
-    "wattage": "650W",
-    "efficiency": "80 Plus Bronze",
-    "modular": "Non-modular"
-  },
-  "createdAt": {
-    "$date": "2025-11-24T05:12:57.430Z"
-  },
-  "updatedAt": {
-    "$date": "2025-11-29T04:53:57.043Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6923e96123c33dfcf3141433"
-  },
-  "name": "Xigmatek Aqua",
-  "brand": "Xigmatek",
-  "price": 750000,
-  "inventory": 45,
-  "images": [
-    "http://localhost:3000/uploads/AquaCase_1.jpg",
-    "http://localhost:3000/uploads/AquaCase_2.jpg",
-    "http://localhost:3000/uploads/AquaCase_3.jpg"
-  ],
-  "description": "Case ATX thiết kế đẹp, airflow tốt.",
-  "productType": "Component",
-  "componentType": "case",
-  "specs": {
-    "formFactor": "ATX",
-    "sidePanel": "Tempered Glass",
-    "fanSupport": "120mm / 140mm"
-  },
-  "createdAt": {
-    "$date": "2025-11-24T05:13:05.649Z"
-  },
-  "updatedAt": {
-    "$date": "2025-11-29T04:55:34.836Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6923e96923c33dfcf3141435"
-  },
-  "name": "Deepcool AG400",
-  "brand": "Deepcool",
-  "price": 450000,
-  "inventory": 80,
-  "images": [
-    "http://localhost:3000/uploads/ag400_1.jpg",
-    "http://localhost:3000/uploads/ag400_2.jpg",
-    "http://localhost:3000/uploads/ag400_3.jpg"
-  ],
-  "description": "Tản khí 1 fan hiệu quả cho CPU tầm trung.",
-  "productType": "Component",
-  "componentType": "cooler",
-  "specs": {
-    "type": "Air Cooling",
-    "fanSize": "120mm",
-    "height": "155mm",
-    "socketSupport": [
-      "LGA1700",
-      "AM4"
-    ]
-  },
-  "createdAt": {
-    "$date": "2025-11-24T05:13:13.427Z"
-  },
-  "updatedAt": {
-    "$date": "2025-11-29T04:57:04.110Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6923e97423c33dfcf3141437"
-  },
-  "name": "NVIDIA RTX 3060 12GB",
-  "brand": "NVIDIA",
-  "price": 7500000,
-  "inventory": 25,
-  "images": [
-    "http://localhost:3000/uploads/rtx3060_1.jpg",
-    "http://localhost:3000/uploads/rtx3060_2.jpg",
-    "http://localhost:3000/uploads/rtx3060_3.jpg"
-  ],
-  "description": "Card đồ họa RTX 3060 hiệu năng cao.",
-  "productType": "Component",
-  "componentType": "vga",
-  "specs": {
-    "memory": "12GB GDDR6",
-    "boostClock": "1777MHz",
-    "powerConsumption": "170W"
-  },
-  "createdAt": {
-    "$date": "2025-11-24T05:13:24.961Z"
-  },
-  "updatedAt": {
-    "$date": "2025-11-29T04:57:58.769Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6923f4ed390a789470182ea2"
-  },
-  "name": "Corsair Vengeance LPX 16GB (2x8) 3200MHz",
-  "brand": "Corsair",
-  "price": 1350000,
-  "inventory": 50,
-  "images": [
-    "http://localhost:3000/uploads/lpx16gb_1.jpg",
-    "http://localhost:3000/uploads/lpx16gb_2.jpg",
-    "http://localhost:3000/uploads/lpx16gb_3.jpg"
-  ],
-  "description": "RAM Corsair LPX bus 3200MHz phổ biến cho gaming.",
-  "productType": "Component",
-  "componentType": "ram",
-  "specs": {
-    "capacity": "16GB",
-    "bus": "3200MHz",
-    "type": "DDR4",
-    "module": "2x8GB"
-  },
-  "createdAt": {
-    "$date": "2025-11-24T06:02:21.852Z"
-  },
-  "updatedAt": {
-    "$date": "2025-11-29T04:59:03.898Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6923f523390a789470182ea5"
-  },
-  "name": "MSI B660M Mortar WiFi DDR4",
-  "brand": "MSI",
-  "price": 3300000,
-  "inventory": 30,
-  "images": [
-    "http://localhost:3000/uploads/motar_1.jpg",
-    "http://localhost:3000/uploads/motar_2.jpg",
-    "http://localhost:3000/uploads/motar_3.jpg"
-  ],
-  "description": "Mainboard MSI B660M Mortar WiFi hỗ trợ Intel 12th.",
-  "productType": "Component",
-  "componentType": "mainboard",
-  "specs": {
-    "socket": "LGA1700",
-    "formFactor": "mATX",
-    "ramSupport": "DDR4",
-    "wifi": true
-  },
-  "createdAt": {
-    "$date": "2025-11-24T06:03:15.956Z"
-  },
-  "updatedAt": {
-    "$date": "2025-11-29T05:01:10.790Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692a7ef21ac548f195b3f086"
-  },
-  "name": "PC Gaming i5 2024",
-  "brand": "Custom",
-  "inventory": 10,
-  "images": [
-    "http://localhost:3000/uploads/pcgaming_1.jpg",
-    "http://localhost:3000/uploads/pcgaming_2.jpg",
-    "http://localhost:3000/uploads/pcgaming_3.jpg"
-  ],
-  "description": "PC gaming tầm trung sử dụng i5 12400F.",
-  "productType": "Computer",
-  "baseName": "PC Gaming i5",
-  "variantId": null,
-  "components": [
-    {
-      "$oid": "6921794fd37aef91e9063b97"
+  {
+    _id: ObjectId("6922c705c9e0de915584a818"),
+    name: "Intel Core i7-12700K",
+    brand: "Intel",
+    price: 9500000,
+    inventory: 20,
+    images: [
+      "http://localhost:3000/uploads/intel-corei7-12700K_1.jpg",
+      "http://localhost:3000/uploads/intel-corei7-12700K_2.jpg",
+      "http://localhost:3000/uploads/intel-corei7-12700K_3.jpg",
+    ],
+    description: "CPU mạnh cho gaming và làm việc",
+    productType: "Component",
+    componentType: "cpu",
+    specs: {
+      cores: 12,
+      threads: 20,
+      baseClock: "3.6GHz",
+      boostClock: "5.0GHz",
+      tdp: "125W",
     },
-    {
-      "$oid": "6922c71ac9e0de915584a81a"
-    },
-    {
-      "$oid": "6923e94123c33dfcf314142d"
-    },
-    {
-      "$oid": "6923e95123c33dfcf314142f"
-    },
-    {
-      "$oid": "6923e95923c33dfcf3141431"
-    },
-    {
-      "$oid": "6923e96123c33dfcf3141433"
-    },
-    {
-      "$oid": "6923e96923c33dfcf3141435"
-    },
-    {
-      "$oid": "6923e97423c33dfcf3141437"
-    }
-  ],
-  "totalPrice": 19300000,
-  "variants": [
-    {
-      "name": "PC Gaming i5 2024 - cpu + ram",
-      "overrides": [
-        {
-          "$oid": "6921794fd37aef91e9063b97"
-        },
-        {
-          "$oid": "6923f4ed390a789470182ea2"
-        }
-      ],
-      "totalPrice": 19750000,
-      "_id": {
-        "$oid": "692a7ef21ac548f195b3f095"
-      }
-    },
-    {
-      "name": "PC Gaming i5 2024 - cpu + ram",
-      "overrides": [
-        {
-          "$oid": "6922c705c9e0de915584a818"
-        },
-        {
-          "$oid": "6923e94123c33dfcf314142d"
-        }
-      ],
-      "totalPrice": 25000000,
-      "_id": {
-        "$oid": "692a7ef21ac548f195b3f09e"
-      }
-    },
-    {
-      "name": "PC Gaming i5 2024 - cpu + ram",
-      "overrides": [
-        {
-          "$oid": "6922c705c9e0de915584a818"
-        },
-        {
-          "$oid": "6923f4ed390a789470182ea2"
-        }
-      ],
-      "totalPrice": 25450000,
-      "_id": {
-        "$oid": "692a7ef21ac548f195b3f0a7"
-      }
-    }
-  ],
-  "optionGroups": [],
-  "changed": [],
-  "createdAt": {
-    "$date": "2025-11-29T05:04:50.033Z"
+    createdAt: ISODate("2025-11-23T08:34:13.048Z"),
+    updatedAt: ISODate("2025-11-29T04:38:55.829Z"),
+    __v: 0,
   },
-  "updatedAt": {
-    "$date": "2025-11-29T05:04:50.162Z"
+  {
+    _id: ObjectId("6922c71ac9e0de915584a81a"),
+    name: "Samsung 980 1TB NVMe",
+    brand: "Samsung",
+    price: 2500000,
+    inventory: 30,
+    images: [
+      "http://localhost:3000/uploads/samsung980_1.jpg",
+      "http://localhost:3000/uploads/samsung980_2.jpg",
+      "http://localhost:3000/uploads/samsung980_3.jpg",
+    ],
+    description: "SSD NVMe 1TB tốc độ cao",
+    productType: "Component",
+    componentType: "ssd",
+    specs: {
+      capacity: "1TB",
+      interface: "NVMe",
+      readSpeed: "3500MB/s",
+      writeSpeed: "3000MB/s",
+    },
+    createdAt: ISODate("2025-11-23T08:34:34.758Z"),
+    updatedAt: ISODate("2025-11-29T04:41:53.897Z"),
+    __v: 0,
   },
-  "__v": 1
-},
-{
-  "_id": {
-    "$oid": "692a7ef21ac548f195b3f091"
+  {
+    _id: ObjectId("6923e94123c33dfcf314142d"),
+    name: "Kingston Fury Beast 16GB DDR4",
+    brand: "Kingston",
+    price: 900000,
+    inventory: 100,
+    images: [
+      "http://localhost:3000/uploads/furybeast16gb_1.jpg",
+      "http://localhost:3000/uploads/furybeast16gb_2.jpg",
+      "http://localhost:3000/uploads/furybeast16gb_3.jpg",
+    ],
+    description: "RAM DDR4 16GB bus 3200MHz.",
+    productType: "Component",
+    componentType: "ram",
+    specs: { capacity: "16GB", type: "DDR4", speed: "3200MHz" },
+    createdAt: ISODate("2025-11-24T05:12:33.283Z"),
+    updatedAt: ISODate("2025-11-29T04:54:42.954Z"),
+    __v: 0,
   },
-  "name": "PC Gaming i5 2024 - cpu + ram",
-  "brand": "Custom",
-  "inventory": 10,
-  "images": [
-    "http://localhost:3000/uploads/pcgaming_1.jpg",
-    "http://localhost:3000/uploads/pcgaming_2.jpg",
-    "http://localhost:3000/uploads/pcgaming_3.jpg"
-  ],
-  "description": "PC gaming tầm trung sử dụng i5 12400F.",
-  "productType": "Computer",
-  "baseName": "PC Gaming i5",
-  "variantId": {
-    "$oid": "692a7ef21ac548f195b3f086"
+  {
+    _id: ObjectId("6923e95123c33dfcf314142f"),
+    name: "ASUS Prime B660M-A",
+    brand: "ASUS",
+    price: 2200000,
+    inventory: 40,
+    images: [
+      "http://localhost:3000/uploads/B660M_1.jpg",
+      "http://localhost:3000/uploads/B660M_2.jpg",
+      "http://localhost:3000/uploads/B660M_3.jpg",
+    ],
+    description: "Mainboard hỗ trợ Intel thế hệ 12.",
+    productType: "Component",
+    componentType: "mainboard",
+    specs: {
+      socket: "LGA1700",
+      chipset: "B660",
+      formFactor: "mATX",
+      memorySupport: "DDR4",
+    },
+    createdAt: ISODate("2025-11-24T05:12:49.156Z"),
+    updatedAt: ISODate("2025-11-29T04:52:59.801Z"),
+    __v: 0,
   },
-  "components": [
-    {
-      "$oid": "6921794fd37aef91e9063b97"
+  {
+    _id: ObjectId("6923e95923c33dfcf3141431"),
+    name: "Cooler Master MWE 650W",
+    brand: "Cooler Master",
+    price: 1200000,
+    inventory: 60,
+    images: [
+      "http://localhost:3000/uploads/mwe_1.jpg",
+      "http://localhost:3000/uploads/mwe_2.jpg",
+      "http://localhost:3000/uploads/mwe_3.jpg",
+    ],
+    description: "Nguồn công suất 650W chuẩn 80 Plus Bronze.",
+    productType: "Component",
+    componentType: "psu",
+    specs: {
+      wattage: "650W",
+      efficiency: "80 Plus Bronze",
+      modular: "Non-modular",
     },
-    {
-      "$oid": "6922c71ac9e0de915584a81a"
-    },
-    {
-      "$oid": "6923f4ed390a789470182ea2"
-    },
-    {
-      "$oid": "6923e95123c33dfcf314142f"
-    },
-    {
-      "$oid": "6923e95923c33dfcf3141431"
-    },
-    {
-      "$oid": "6923e96123c33dfcf3141433"
-    },
-    {
-      "$oid": "6923e96923c33dfcf3141435"
-    },
-    {
-      "$oid": "6923e97423c33dfcf3141437"
-    }
-  ],
-  "totalPrice": 19750000,
-  "variants": [],
-  "optionGroups": [],
-  "changed": [
-    {
-      "$oid": "6923f4ed390a789470182ea2"
-    }
-  ],
-  "createdAt": {
-    "$date": "2025-11-29T05:04:50.077Z"
+    createdAt: ISODate("2025-11-24T05:12:57.430Z"),
+    updatedAt: ISODate("2025-11-29T04:53:57.043Z"),
+    __v: 0,
   },
-  "updatedAt": {
-    "$date": "2025-11-29T05:04:50.077Z"
+  {
+    _id: ObjectId("6923e96123c33dfcf3141433"),
+    name: "Xigmatek Aqua",
+    brand: "Xigmatek",
+    price: 750000,
+    inventory: 45,
+    images: [
+      "http://localhost:3000/uploads/AquaCase_1.jpg",
+      "http://localhost:3000/uploads/AquaCase_2.jpg",
+      "http://localhost:3000/uploads/AquaCase_3.jpg",
+    ],
+    description: "Case ATX thiết kế đẹp, airflow tốt.",
+    productType: "Component",
+    componentType: "case",
+    specs: {
+      formFactor: "ATX",
+      sidePanel: "Tempered Glass",
+      fanSupport: "120mm / 140mm",
+    },
+    createdAt: ISODate("2025-11-24T05:13:05.649Z"),
+    updatedAt: ISODate("2025-11-29T04:55:34.836Z"),
+    __v: 0,
   },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692a7ef21ac548f195b3f09a"
+  {
+    _id: ObjectId("6923e96923c33dfcf3141435"),
+    name: "Deepcool AG400",
+    brand: "Deepcool",
+    price: 450000,
+    inventory: 80,
+    images: [
+      "http://localhost:3000/uploads/ag400_1.jpg",
+      "http://localhost:3000/uploads/ag400_2.jpg",
+      "http://localhost:3000/uploads/ag400_3.jpg",
+    ],
+    description: "Tản khí 1 fan hiệu quả cho CPU tầm trung.",
+    productType: "Component",
+    componentType: "cooler",
+    specs: {
+      type: "Air Cooling",
+      fanSize: "120mm",
+      height: "155mm",
+      socketSupport: ["LGA1700", "AM4"],
+    },
+    createdAt: ISODate("2025-11-24T05:13:13.427Z"),
+    updatedAt: ISODate("2025-11-29T04:57:04.110Z"),
+    __v: 0,
   },
-  "name": "PC Gaming i5 2024 - cpu + ram",
-  "brand": "Custom",
-  "inventory": 10,
-  "images": [
-    "http://localhost:3000/uploads/pcgaming_1.jpg",
-    "http://localhost:3000/uploads/pcgaming_2.jpg",
-    "http://localhost:3000/uploads/pcgaming_3.jpg"
-  ],
-  "description": "PC gaming tầm trung sử dụng i5 12400F.",
-  "productType": "Computer",
-  "baseName": "PC Gaming i5",
-  "variantId": {
-    "$oid": "692a7ef21ac548f195b3f086"
+  {
+    _id: ObjectId("6923e97423c33dfcf3141437"),
+    name: "NVIDIA RTX 3060 12GB",
+    brand: "NVIDIA",
+    price: 7500000,
+    inventory: 25,
+    images: [
+      "http://localhost:3000/uploads/rtx3060_1.jpg",
+      "http://localhost:3000/uploads/rtx3060_2.jpg",
+      "http://localhost:3000/uploads/rtx3060_3.jpg",
+    ],
+    description: "Card đồ họa RTX 3060 hiệu năng cao.",
+    productType: "Component",
+    componentType: "vga",
+    specs: {
+      memory: "12GB GDDR6",
+      boostClock: "1777MHz",
+      powerConsumption: "170W",
+    },
+    createdAt: ISODate("2025-11-24T05:13:24.961Z"),
+    updatedAt: ISODate("2025-11-29T04:57:58.769Z"),
+    __v: 0,
   },
-  "components": [
-    {
-      "$oid": "6922c705c9e0de915584a818"
-    },
-    {
-      "$oid": "6922c71ac9e0de915584a81a"
-    },
-    {
-      "$oid": "6923e94123c33dfcf314142d"
-    },
-    {
-      "$oid": "6923e95123c33dfcf314142f"
-    },
-    {
-      "$oid": "6923e95923c33dfcf3141431"
-    },
-    {
-      "$oid": "6923e96123c33dfcf3141433"
-    },
-    {
-      "$oid": "6923e96923c33dfcf3141435"
-    },
-    {
-      "$oid": "6923e97423c33dfcf3141437"
-    }
-  ],
-  "totalPrice": 25000000,
-  "variants": [],
-  "optionGroups": [],
-  "changed": [
-    {
-      "$oid": "6922c705c9e0de915584a818"
-    }
-  ],
-  "createdAt": {
-    "$date": "2025-11-29T05:04:50.108Z"
+  {
+    _id: ObjectId("6923f4ed390a789470182ea2"),
+    name: "Corsair Vengeance LPX 16GB (2x8) 3200MHz",
+    brand: "Corsair",
+    price: 1350000,
+    inventory: 50,
+    images: [
+      "http://localhost:3000/uploads/lpx16gb_1.jpg",
+      "http://localhost:3000/uploads/lpx16gb_2.jpg",
+      "http://localhost:3000/uploads/lpx16gb_3.jpg",
+    ],
+    description: "RAM Corsair LPX bus 3200MHz phổ biến cho gaming.",
+    productType: "Component",
+    componentType: "ram",
+    specs: { capacity: "16GB", bus: "3200MHz", type: "DDR4", module: "2x8GB" },
+    createdAt: ISODate("2025-11-24T06:02:21.852Z"),
+    updatedAt: ISODate("2025-11-29T04:59:03.898Z"),
+    __v: 0,
   },
-  "updatedAt": {
-    "$date": "2025-11-29T05:04:50.108Z"
+  {
+    _id: ObjectId("6923f523390a789470182ea5"),
+    name: "MSI B660M Mortar WiFi DDR4",
+    brand: "MSI",
+    price: 3300000,
+    inventory: 30,
+    images: [
+      "http://localhost:3000/uploads/motar_1.jpg",
+      "http://localhost:3000/uploads/motar_2.jpg",
+      "http://localhost:3000/uploads/motar_3.jpg",
+    ],
+    description: "Mainboard MSI B660M Mortar WiFi hỗ trợ Intel 12th.",
+    productType: "Component",
+    componentType: "mainboard",
+    specs: {
+      socket: "LGA1700",
+      formFactor: "mATX",
+      ramSupport: "DDR4",
+      wifi: true,
+    },
+    createdAt: ISODate("2025-11-24T06:03:15.956Z"),
+    updatedAt: ISODate("2025-11-29T05:01:10.790Z"),
+    __v: 0,
   },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692a7ef21ac548f195b3f0a3"
+  {
+    _id: ObjectId("692a7ef21ac548f195b3f086"),
+    name: "PC Gaming i5 2024",
+    brand: "Custom",
+    inventory: 10,
+    images: [
+      "http://localhost:3000/uploads/pcgaming_1.jpg",
+      "http://localhost:3000/uploads/pcgaming_2.jpg",
+      "http://localhost:3000/uploads/pcgaming_3.jpg",
+    ],
+    description: "PC gaming tầm trung sử dụng i5 12400F.",
+    productType: "Computer",
+    baseName: "PC Gaming i5",
+    variantId: null,
+    components: [
+      ObjectId("6921794fd37aef91e9063b97"),
+      ObjectId("6922c71ac9e0de915584a81a"),
+      ObjectId("6923e94123c33dfcf314142d"),
+      ObjectId("6923e95123c33dfcf314142f"),
+      ObjectId("6923e95923c33dfcf3141431"),
+      ObjectId("6923e96123c33dfcf3141433"),
+      ObjectId("6923e96923c33dfcf3141435"),
+      ObjectId("6923e97423c33dfcf3141437"),
+    ],
+    totalPrice: 19300000,
+    variants: [
+      {
+        name: "PC Gaming i5 2024 - cpu + ram",
+        overrides: [
+          ObjectId("6921794fd37aef91e9063b97"),
+          ObjectId("6923f4ed390a789470182ea2"),
+        ],
+        totalPrice: 19750000,
+        _id: ObjectId("692a7ef21ac548f195b3f095"),
+      },
+      {
+        name: "PC Gaming i5 2024 - cpu + ram",
+        overrides: [
+          ObjectId("6922c705c9e0de915584a818"),
+          ObjectId("6923e94123c33dfcf314142d"),
+        ],
+        totalPrice: 25000000,
+        _id: ObjectId("692a7ef21ac548f195b3f09e"),
+      },
+      {
+        name: "PC Gaming i5 2024 - cpu + ram",
+        overrides: [
+          ObjectId("6922c705c9e0de915584a818"),
+          ObjectId("6923f4ed390a789470182ea2"),
+        ],
+        totalPrice: 25450000,
+        _id: ObjectId("692a7ef21ac548f195b3f0a7"),
+      },
+    ],
+    optionGroups: [],
+    changed: [],
+    createdAt: ISODate("2025-11-29T05:04:50.033Z"),
+    updatedAt: ISODate("2025-11-29T05:04:50.162Z"),
+    __v: 1,
   },
-  "name": "PC Gaming i5 2024 - cpu + ram",
-  "brand": "Custom",
-  "inventory": 10,
-  "images": [
-    "http://localhost:3000/uploads/pcgaming_1.jpg",
-    "http://localhost:3000/uploads/pcgaming_2.jpg",
-    "http://localhost:3000/uploads/pcgaming_3.jpg"
-  ],
-  "description": "PC gaming tầm trung sử dụng i5 12400F.",
-  "productType": "Computer",
-  "baseName": "PC Gaming i5",
-  "variantId": {
-    "$oid": "692a7ef21ac548f195b3f086"
+  {
+    _id: ObjectId("692a7ef21ac548f195b3f091"),
+    name: "PC Gaming i5 2024 - cpu + ram",
+    brand: "Custom",
+    inventory: 10,
+    images: [
+      "http://localhost:3000/uploads/pcgaming_1.jpg",
+      "http://localhost:3000/uploads/pcgaming_2.jpg",
+      "http://localhost:3000/uploads/pcgaming_3.jpg",
+    ],
+    description: "PC gaming tầm trung sử dụng i5 12400F.",
+    productType: "Computer",
+    baseName: "PC Gaming i5",
+    variantId: ObjectId("692a7ef21ac548f195b3f086"),
+    components: [
+      ObjectId("6921794fd37aef91e9063b97"),
+      ObjectId("6922c71ac9e0de915584a81a"),
+      ObjectId("6923f4ed390a789470182ea2"),
+      ObjectId("6923e95123c33dfcf314142f"),
+      ObjectId("6923e95923c33dfcf3141431"),
+      ObjectId("6923e96123c33dfcf3141433"),
+      ObjectId("6923e96923c33dfcf3141435"),
+      ObjectId("6923e97423c33dfcf3141437"),
+    ],
+    totalPrice: 19750000,
+    variants: [],
+    optionGroups: [],
+    changed: [ObjectId("6923f4ed390a789470182ea2")],
+    createdAt: ISODate("2025-11-29T05:04:50.077Z"),
+    updatedAt: ISODate("2025-11-29T05:04:50.077Z"),
+    __v: 0,
   },
-  "components": [
-    {
-      "$oid": "6922c705c9e0de915584a818"
-    },
-    {
-      "$oid": "6922c71ac9e0de915584a81a"
-    },
-    {
-      "$oid": "6923f4ed390a789470182ea2"
-    },
-    {
-      "$oid": "6923e95123c33dfcf314142f"
-    },
-    {
-      "$oid": "6923e95923c33dfcf3141431"
-    },
-    {
-      "$oid": "6923e96123c33dfcf3141433"
-    },
-    {
-      "$oid": "6923e96923c33dfcf3141435"
-    },
-    {
-      "$oid": "6923e97423c33dfcf3141437"
-    }
-  ],
-  "totalPrice": 25450000,
-  "variants": [],
-  "optionGroups": [],
-  "changed": [
-    {
-      "$oid": "6922c705c9e0de915584a818"
-    },
-    {
-      "$oid": "6923f4ed390a789470182ea2"
-    }
-  ],
-  "createdAt": {
-    "$date": "2025-11-29T05:04:50.134Z"
+  {
+    _id: ObjectId("692a7ef21ac548f195b3f09a"),
+    name: "PC Gaming i5 2024 - cpu + ram",
+    brand: "Custom",
+    inventory: 10,
+    images: [
+      "http://localhost:3000/uploads/pcgaming_1.jpg",
+      "http://localhost:3000/uploads/pcgaming_2.jpg",
+      "http://localhost:3000/uploads/pcgaming_3.jpg",
+    ],
+    description: "PC gaming tầm trung sử dụng i5 12400F.",
+    productType: "Computer",
+    baseName: "PC Gaming i5",
+    variantId: ObjectId("692a7ef21ac548f195b3f086"),
+    components: [
+      ObjectId("6922c705c9e0de915584a818"),
+      ObjectId("6922c71ac9e0de915584a81a"),
+      ObjectId("6923e94123c33dfcf314142d"),
+      ObjectId("6923e95123c33dfcf314142f"),
+      ObjectId("6923e95923c33dfcf3141431"),
+      ObjectId("6923e96123c33dfcf3141433"),
+      ObjectId("6923e96923c33dfcf3141435"),
+      ObjectId("6923e97423c33dfcf3141437"),
+    ],
+    totalPrice: 25000000,
+    variants: [],
+    optionGroups: [],
+    changed: [ObjectId("6922c705c9e0de915584a818")],
+    createdAt: ISODate("2025-11-29T05:04:50.108Z"),
+    updatedAt: ISODate("2025-11-29T05:04:50.108Z"),
+    __v: 0,
   },
-  "updatedAt": {
-    "$date": "2025-11-29T05:04:50.134Z"
+  {
+    _id: ObjectId("692a7ef21ac548f195b3f0a3"),
+    name: "PC Gaming i5 2024 - cpu + ram",
+    brand: "Custom",
+    inventory: 10,
+    images: [
+      "http://localhost:3000/uploads/pcgaming_1.jpg",
+      "http://localhost:3000/uploads/pcgaming_2.jpg",
+      "http://localhost:3000/uploads/pcgaming_3.jpg",
+    ],
+    description: "PC gaming tầm trung sử dụng i5 12400F.",
+    productType: "Computer",
+    baseName: "PC Gaming i5",
+    variantId: ObjectId("692a7ef21ac548f195b3f086"),
+    components: [
+      ObjectId("6922c705c9e0de915584a818"),
+      ObjectId("6922c71ac9e0de915584a81a"),
+      ObjectId("6923f4ed390a789470182ea2"),
+      ObjectId("6923e95123c33dfcf314142f"),
+      ObjectId("6923e95923c33dfcf3141431"),
+      ObjectId("6923e96123c33dfcf3141433"),
+      ObjectId("6923e96923c33dfcf3141435"),
+      ObjectId("6923e97423c33dfcf3141437"),
+    ],
+    totalPrice: 25450000,
+    variants: [],
+    optionGroups: [],
+    changed: [
+      ObjectId("6922c705c9e0de915584a818"),
+      ObjectId("6923f4ed390a789470182ea2"),
+    ],
+    createdAt: ISODate("2025-11-29T05:04:50.134Z"),
+    updatedAt: ISODate("2025-11-29T05:04:50.134Z"),
+    __v: 0,
   },
-  "__v": 0
-}]
-
+];
+//////////////////
+let carts = [
+  {
+    _id: ObjectId("6922dc4a7b6d736b14525d4c"),
+    userId: "user123",
+    items: [
+      {
+        productId: ObjectId("6922c865dfbeffdd7fc1ad79"),
+        quantity: 2,
+        _id: ObjectId("6922e148920c11023758b268"),
+      },
+    ],
+    __v: 3,
+  },
+  {
+    _id: ObjectId("6922dcfd7b6d736b14525d55"),
+    userId: "userABC",
+    items: [
+      {
+        productId: ObjectId("6922c71ac9e0de915584a81a"),
+        quantity: 13,
+        _id: ObjectId("6922dcfd7b6d736b14525d57"),
+      },
+      {
+        productId: ObjectId("6921794fd37aef91e9063b97"),
+        quantity: 2,
+        _id: ObjectId("6922e0023e960a3bab9eb910"),
+      },
+      {
+        productId: ObjectId("6922c865dfbeffdd7fc1ad79"),
+        quantity: 1,
+        _id: ObjectId("6922e0143e960a3bab9eb915"),
+      },
+    ],
+    __v: 3,
+  },
+];
 db.products.drop();
-db.products.insertMany([
-    {name: 'test', price: 100},
-    {name: 'test', price: 100},
-    {name: 'test', price: 100}
-]);
+db.products.insertMany(products);
+db.carts.insertMany(carts);
+// db.products.insertMany([
+//   { name: "test", price: 100 },
+//   { name: "test", price: 100 },
+//   { name: "test", price: 100 },
+// ]);
 
 print("Products data inserted successfully!");
