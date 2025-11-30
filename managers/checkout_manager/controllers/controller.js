@@ -10,7 +10,7 @@ const productClient = require('../clients/productClient')
 const JWT_LOGIN_SECRET = process.env.JWT_LOGIN_SECRET
 
 
-const checkoutOrder = async (token, payload, ipAddress, callbackURL, deliveryAddress, items, couponId, applyLoyaltyPoint) => {
+const checkoutOrder = async (token, payload, ipAddress, callbackURL, email, deliveryAddress, items, couponId, applyLoyaltyPoint) => {
     try {
         var totalMoney = 0
         var loyaltyPoint = undefined
@@ -24,7 +24,6 @@ const checkoutOrder = async (token, payload, ipAddress, callbackURL, deliveryAdd
             }
             
             totalMoney += product.price * quantity
-            await productClient.updateProduct(productId, product.inventory - quantity)
         }
 
         if (couponId) {
@@ -33,7 +32,7 @@ const checkoutOrder = async (token, payload, ipAddress, callbackURL, deliveryAdd
         }
 
         if (payload && applyLoyaltyPoint) {
-            const customer = await customerClient.getCustomer(token, payload.id)
+            const customer = await customerClient.getCustomer(token)
             const toMoney = customer.loyaltyPoint * 1000
             
             if (toMoney >= totalMoney) {
@@ -43,11 +42,9 @@ const checkoutOrder = async (token, payload, ipAddress, callbackURL, deliveryAdd
                 totalMoney -= toMoney
                 loyaltyPoint = customer.loyaltyPoint
             }
-
-            await customerClient.updateCustomer(authToken, payload.id, customer.loyaltyPoint - loyaltyPoint)
         }
         
-        const orderId = await orderClient.createOrder(token, deliveryAddress, totalMoney, items, couponId, loyaltyPoint)
+        const orderId = await orderClient.createOrder(token, email, deliveryAddress, totalMoney, items, couponId, loyaltyPoint)
         const paymentUrl = await paymentGateway.createPaymentUrl(ipAddress, callbackURL, orderId, totalMoney)
         return { status: 200, data: paymentUrl }
     }
@@ -67,41 +64,79 @@ const processPayment = async (vnp_Params) => {
     if (isIntegral) {
         try {
             const order = await orderClient.findOrder(authToken, orderId);
-            const customer = await customerClient.getCustomer(authToken, order.customerId)
             
             if ((order.totalMoney * 100) != vnp_Params['vnp_Amount']) {
                 return {RspCode: '04', Message: 'Amount invalid'}
             } 
 
+            console.log(order)
+
             if (order.status == "Pending") {
                 if (rspCode=="00"){
-                    await customerClient.updateCustomer(authToken, order.customerId, customer.loyaltyPoint + (Math.floor(order.totalMoney * 0.03 / 1000)))
-                    await orderClient.updateOrder(authToken, orderId, 'Paid')
-                    await emailClient.sendEmail(customer.email, `
-                        <h2>Order Paid Successfully</h2>
-                        <p>Your order id: ${order._id}</p>
-                    `)
+                    try {
+                        for (var i = 0; i < order.items.length; i++) {
+                            const { productId, quantity } = order.items[i]
+                            const product = await productClient.getProduct(productId)
 
-                    return {RspCode: '00', Message: 'Success'}
-                }
-                else {
-                    for (var i = 0; i < order.items.length; i++) {
-                        const { productId, quantity } = items[i]
-                        const product = await productClient.getProduct(productId)
+                            if (product.inventory < quantity) {
+                                await emailClient.sendEmail(order.email, `
+                                    <h2>Order Paid Failed: Inventory conflict</h2>
+                                    <p>Your order id: ${order._id}</p>
+                                `)
 
-                        await productClient.updateProduct(productId, product.inventory + quantity)
+                                return {RspCode: '00', Message: 'Success'}
+                            }
+                        }
+
+
+                        if (order.customerId) {
+                            const customer = await customerClient.getCustomerById(authToken, order.customerId)
+                            await customerClient.updateCustomer(
+                                authToken, order.customerId, 
+                                customer.loyaltyPoint - (order.loyaltyPoint ?? 0) + (Math.floor(order.totalMoney * 0.03 / 1000))
+                            )
+                        }
+
+                        if (order.couponId) {
+                            const coupon = await couponClient.getCoupon(order.couponId)
+                            await couponClient.updateCoupon(authToken, order.couponId, coupon.usage + 1)
+                        }
+                        
+                        for (var i = 0; i < order.items.length; i++) {
+                            const { productId, quantity } = order.items[i]
+                            const product = await productClient.getProduct(productId)
+                            await productClient.updateProduct(productId, product.inventory - quantity)
+                        }
+
+                        console.log("pass product")
+                        
+                        await orderClient.updateOrder(authToken, orderId, 'Paid')
+                        await emailClient.sendEmail(order.email, `
+                            <h2>Order Paid Successfully</h2>
+                            <p>Your order id: ${order._id}</p>
+                        `)
+                        
                     }
 
-                    await customerClient.updateCustomer(authToken, order.customerId, customer.loyaltyPoint + order.loyaltyPoint)
-                    await emailClient.sendEmail(customer.email, `
-                        <h2>Order Paid Failed</h2>
-                        <p>Your order id: ${order._id}</p>
-                    `)
-                    
+                    catch (err) {
+                        console.log(err)
+
+                        await orderClient.updateOrder(authToken, orderId, 'Failed')
+                        await emailClient.sendEmail(order.email, `
+                            <h2>Order Paid Failed</h2>
+                            <p>Your order id: ${order._id}</p>
+                        `)
+                    }
+
                     return {RspCode: '00', Message: 'Success'}
                 }
             }
             else{
+                await emailClient.sendEmail(order.email, `
+                    <h2>Order Paid Failed: Order was already paid</h2>
+                    <p>Your order id: ${order._id}</p>
+                `)
+
                 return {RspCode: '02', Message: 'This order has been updated to the payment status'}
             }
         }

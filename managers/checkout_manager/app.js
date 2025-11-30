@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.post('/checkout', authMiddleware, async function (req, res) {
-    const { deliveryAddress, items, couponId = undefined, applyLoyaltyPoint, callbackURL } = req.body
+    const { email, deliveryAddress, items, couponId = undefined, applyLoyaltyPoint, callbackURL } = req.body
     const ipAddress = req.headers['x-forwarded-for'] ||
                         req.connection.remoteAddress ||
                         req.socket.remoteAddress ||
@@ -23,7 +23,7 @@ app.post('/checkout', authMiddleware, async function (req, res) {
     const token = req.token
     const payload = req.payload
 
-    const result = await controller.checkoutOrder(token, payload, ipAddress, callbackURL, deliveryAddress, items, couponId, applyLoyaltyPoint)
+    const result = await controller.checkoutOrder(token, payload, ipAddress, callbackURL, email, deliveryAddress, items, couponId, applyLoyaltyPoint)
 
     if (result.status != 200) { res.status(result.status).json({ data: result.data }) } 
     else { res.status(result.status).json({ paymentURL: result.data} ) }

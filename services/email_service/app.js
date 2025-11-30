@@ -22,7 +22,8 @@ const oAuth2Client = new google.auth.OAuth2(
 oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
 
 app.post('/send-email', async (req, res) => {
-    const { receiver, content } = req.body
+    const { receiver, subject, content } = req.body
+    console.log(receiver, content)
 
     try {
         const accessToken = await oAuth2Client.getAccessToken();
@@ -42,7 +43,7 @@ app.post('/send-email', async (req, res) => {
         const mailOptions = {
             from: `"E-Commerce" <${process.env.EMAIL_SENDER}>`,
             to: receiver,
-            subject: "Your Password",
+            subject: subject,
             html: content,
         };
 

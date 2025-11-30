@@ -1,4 +1,3 @@
-// dbInit.js
 db = db.getSiblingDB("products");
 
 let products = [
@@ -408,7 +407,7 @@ let products = [
     __v: 0,
   },
 ];
-//////////////////
+
 let carts = [
   {
     _id: ObjectId("6922dc4a7b6d736b14525d4c"),
@@ -445,13 +444,176 @@ let carts = [
     __v: 3,
   },
 ];
+
+let coupons = [
+  {
+    "code": "384921",
+    "max": 8,
+    "usage": 0,
+    "expiredDate": "2025-12-07T00:00:00.000Z",
+    "discount": 23,
+    "minCondition": 14200000
+  },
+  {
+    "code": "927450",
+    "max": 4,
+    "usage": 0,
+    "expiredDate": "2025-12-10T00:00:00.000Z",
+    "discount": 10,
+    "minCondition": 22400000
+  },
+  {
+    "code": "510284",
+    "max": 6,
+    "usage": 0,
+    "expiredDate": "2025-12-11T00:00:00.000Z",
+    "discount": 55,
+    "minCondition": 7000000
+  },
+  {
+    "code": "661392",
+    "max": 9,
+    "usage": 0,
+    "expiredDate": "2025-12-12T00:00:00.000Z",
+    "discount": 85,
+    "minCondition": 12000000
+  },
+  {
+    "code": "840129",
+    "max": 10,
+    "usage": 0,
+    "expiredDate": "2025-12-13T00:00:00.000Z",
+    "discount": 12,
+    "minCondition": 17400000
+  },
+  {
+    "code": "492610",
+    "max": 3,
+    "usage": 0,
+    "expiredDate": "2025-12-08T00:00:00.000Z",
+    "discount": 66,
+    "minCondition": 9000000
+  },
+  {
+    "code": "175943",
+    "max": 7,
+    "usage": 0,
+    "expiredDate": "2025-12-06T00:00:00.000Z",
+    "discount": 5,
+    "minCondition": 28000000
+  },
+  {
+    "code": "903842",
+    "max": 5,
+    "usage": 0,
+    "expiredDate": "2025-12-14T00:00:00.000Z",
+    "discount": 100,
+    "minCondition": 21000000
+  },
+  {
+    "code": "220498",
+    "max": 6,
+    "usage": 0,
+    "expiredDate": "2025-12-09T00:00:00.000Z",
+    "discount": 33,
+    "minCondition": 19500000
+  },
+  {
+    "code": "374821",
+    "max": 2,
+    "usage": 0,
+    "expiredDate": "2025-12-13T00:00:00.000Z",
+    "discount": 41,
+    "minCondition": 25000000
+  },
+  {
+    "code": "558301",
+    "max": 1,
+    "usage": 0,
+    "expiredDate": "2025-12-07T00:00:00.000Z",
+    "discount": 60,
+    "minCondition": 13000000
+  },
+  {
+    "code": "693024",
+    "max": 9,
+    "usage": 0,
+    "expiredDate": "2025-12-12T00:00:00.000Z",
+    "discount": 72,
+    "minCondition": 8000000
+  },
+  {
+    "code": "802915",
+    "max": 4,
+    "usage": 0,
+    "expiredDate": "2025-12-11T00:00:00.000Z",
+    "discount": 25,
+    "minCondition": 18500000
+  },
+  {
+    "code": "947520",
+    "max": 10,
+    "usage": 0,
+    "expiredDate": "2025-12-08T00:00:00.000Z",
+    "discount": 15,
+    "minCondition": 14700000
+  },
+  {
+    "code": "310864",
+    "max": 8,
+    "usage": 0,
+    "expiredDate": "2025-12-14T00:00:00.000Z",
+    "discount": 90,
+    "minCondition": 30000000
+  },
+  {
+    "code": "764120",
+    "max": 5,
+    "usage": 0,
+    "expiredDate": "2025-12-10T00:00:00.000Z",
+    "discount": 44,
+    "minCondition": 16000000
+  },
+  {
+    "code": "514239",
+    "max": 7,
+    "usage": 0,
+    "expiredDate": "2025-12-06T00:00:00.000Z",
+    "discount": 32,
+    "minCondition": 22000000
+  },
+  {
+    "code": "682431",
+    "max": 3,
+    "usage": 0,
+    "expiredDate": "2025-12-09T00:00:00.000Z",
+    "discount": 17,
+    "minCondition": 7800000
+  },
+  {
+    "code": "129754",
+    "max": 6,
+    "usage": 0,
+    "expiredDate": "2025-12-07T00:00:00.000Z",
+    "discount": 58,
+    "minCondition": 26000000
+  },
+  {
+    "code": "906371",
+    "max": 9,
+    "usage": 0,
+    "expiredDate": "2025-12-12T00:00:00.000Z",
+    "discount": 21,
+    "minCondition": 17000000
+  }
+]
+
 db.products.drop();
 db.products.insertMany(products);
 db.carts.insertMany(carts);
-// db.products.insertMany([
-//   { name: "test", price: 100 },
-//   { name: "test", price: 100 },
-//   { name: "test", price: 100 },
-// ]);
+
+db = db.getSiblingDB("coupons")
+db.coupons.drop()
+db.coupons.insertMany(coupons)
 
 print("Products data inserted successfully!");

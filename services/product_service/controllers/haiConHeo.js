@@ -530,6 +530,8 @@ exports.updateProduct = async (req, res) => {
       }
     }
 
+    console.log(req.body)
+
     const updated = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,

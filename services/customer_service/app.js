@@ -25,8 +25,8 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 const validateInfo = [
-    check('fullName').trim().notEmpty().withMessage("Full name is required"),
-    check("addresses").isArray({min: 1}).withMessage("Must have one address"),
+    check('fullName').optional().trim().notEmpty().withMessage("Full name is required"),
+    check("addresses").optional().isArray({min: 1}).withMessage("Must have one address"),
     check("addresses.*").trim().notEmpty().withMessage("Address must not be empty")
 ]
 
@@ -161,6 +161,8 @@ app.put('/customers/:id', validateInfo, async (req, res) => {
     if (dryrun) {
         return res.json({fullName, addresses })
     }
+
+    console.log(loyaltyPoint)
 
     await Customer.updateOne({ _id: id }, { fullname: fullName, addresses, loyaltyPoint })
     res.status(200).json({message: "Successfully updated"})

@@ -13,6 +13,21 @@ const getCoupon = async (couponId) => {
     }
 }
 
+const updateCoupon = async (token, couponId, usage) => {
+    try {
+        const couponResponse = await axios.put(`${COUPON_SERVICE_ROOT}/coupons/${couponId}`, {usage}, {
+            'headers': { 'Authorization': `Bearer ${token}` }
+        })
+
+        const data = couponResponse.data
+        return data.message
+    } 
+    catch (err) {
+        throw err
+    }
+}
+
 module.exports = {
-    getCoupon
+    getCoupon,
+    updateCoupon
 }

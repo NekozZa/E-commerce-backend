@@ -25,10 +25,10 @@ router.post('/', async (req, res) => {
             }
         } 
 
-        const { deliveryAddress, items, couponId = undefined, applyLoyaltyPoint = false } = req.body
+        const { email, deliveryAddress, items, couponId = undefined, applyLoyaltyPoint = false } = req.body
         const response = await checkoutManager.post(`/checkout`, 
             {  
-                deliveryAddress, items, couponId, applyLoyaltyPoint,
+                email, deliveryAddress, items, couponId, applyLoyaltyPoint,
                 callbackURL: 'http://localhost:5000/api/checkout/callback' 
             },
 

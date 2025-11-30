@@ -16,9 +16,9 @@ const getAllOrders = async (req, res) => {
 }
 
 const getMyOrders = async (req, res) => {
-    const { orderFields = 'purchaseDate:dsc', filterFields = undefined, page = 1, limit = 10 } = req.query;
+    var { orderFields = 'purchaseDate:dsc', filterFields = undefined, page = 1, limit = 10 } = req.query;
     
-    if (filterFields) { filterFields += `customerId:$eq:${req.user.id}` }
+    if (filterFields) { filterFields += `,customerId:$eq:${req.user.id}` }
     else { filterFields = `customerId:$eq:${req.user.id}` }
 
     const orders = await getOrders(orderFields, filterFields, page, limit)
@@ -53,12 +53,12 @@ const addOrders = async () => {
 }
 
 const addOrder = (req, res) => {
-    const { deliveryAddress, totalMoney, items, couponId, loyaltyPoint = undefined } = req.body
+    const { email, deliveryAddress, totalMoney, items, couponId, loyaltyPoint = undefined } = req.body
     const expiredDate = new Date(Date.now() + EXPIRY * 60 * 1000)
     const authHeader = req.headers.authorization
     const token = authHeader.split(' ')[1]
 
-    var order = { deliveryAddress, expiredDate, totalMoney, items, couponId, loyaltyPoint }
+    var order = { email, deliveryAddress, expiredDate, totalMoney, items, couponId, loyaltyPoint }
 
     if (token) {
         try {
@@ -141,7 +141,7 @@ const deleteOrder = (req, res) => {
 }
 
 const checkStatus = (oldStatus, newStatus) => {
-    const statusQueue = ['Pending', 'Paid', 'On the way', 'Delivered']
+    const statusQueue = ['Pending', 'Paid', 'On the way', 'Delivered', 'Failed']
     return statusQueue.indexOf(newStatus) - statusQueue.indexOf(oldStatus)
 }
 

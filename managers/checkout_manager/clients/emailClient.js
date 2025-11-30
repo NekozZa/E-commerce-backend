@@ -6,6 +6,7 @@ const sendEmail = async (receiver, content) => {
     try {
         await axios.post(`${EMAIL_SERVICE_ENDPOINT}/send-email`, {
             receiver,
+            subject: 'Order Result',
             content
         })
     } 

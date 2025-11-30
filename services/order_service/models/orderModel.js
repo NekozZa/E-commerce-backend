@@ -6,6 +6,11 @@ const orderSchema = mongoose.Schema({
         ref: 'Customer'
     },
 
+    email: {
+        type: String,
+        required: true
+    },
+
     deliveryAddress: {
         type: String,
         required: true
@@ -29,7 +34,8 @@ const orderSchema = mongoose.Schema({
     items: [
         {   
             productId: {
-                type: String,
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product',
                 required: true
             },
 
@@ -51,7 +57,7 @@ const orderSchema = mongoose.Schema({
 
     status: {
         type: String,
-        enum: ['Pending', 'Paid', 'On the way', 'Delivered'],
+        enum: ['Pending', 'Paid', 'On the way', 'Delivered', 'Failed'],
         default: 'Pending'
     }
 })

@@ -161,7 +161,12 @@ app.put('/coupons/:id', authMiddleware, validateInfo, async (req, res) => {
     }
 
     const couponId = req.params.id
-    const { max, expiredDate, discount, minCondition } = req.body
+    const { max, usage, expiredDate, discount, minCondition } = req.body
+    
+    if (usage == max) {
+        await Coupon.deleteOne({ _id: couponId })
+        res.status(200).json({message: "Coupon was deleted due to out of usage"})
+    }
 
     const coupon = await Coupon.findOne({ _id: couponId })
     const newExpiredDate = expiredDate ? new Date(expiredDate) : coupon.expiredDate
@@ -169,7 +174,7 @@ app.put('/coupons/:id', authMiddleware, validateInfo, async (req, res) => {
     if (!coupon) { return res.status(404).json({error: "Coupon not found"}) }
     else if (newExpiredDate < coupon.expiredDate) { return res.status(404).json({error: "Invalid expiredDate"}) }
 
-    await Coupon.updateOne({ _id: couponId }, { max, expiredDate: newExpiredDate, discount, minCondition })
+    await Coupon.updateOne({ _id: couponId }, { max, usage, expiredDate: newExpiredDate, discount, minCondition })
     
     res.status(200).json({message: "Successfully updated"})
 })
