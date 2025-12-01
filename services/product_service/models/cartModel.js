@@ -10,7 +10,7 @@ const cartItemSchema = new mongoose.Schema({
 });
 
 const cartSchema = new mongoose.Schema({
-  userId: { type: String, required: true },
+  userId: { type: mongoose.Schema.ObjectId, required: true },
   items: [cartItemSchema],
 });
 

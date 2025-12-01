@@ -2,41 +2,7 @@ const Cart = require("../models/cartModel");
 const Product = require("../models/productModel");
 const Component = require("../models/componentModel");
 const Computer = require("../models/computer_Model");
-// Get Cart
-// exports.getCart = async (req, res) => {
-//   try {
-//     const { userId } = req.params;
-//     let cart = await Cart.findOne({ userId });
-//     if (!cart) {
-//       cart = await Cart.create({ userId, items: [] });
-//     }
-//     return res.status(200).json(cart);
-//   } catch (err) {
-//     return res.status(500).json({ message: err.message });
-//   }
-// };
-//add item
-// exports.addItem = async (req, res) => {
-//   try {
-//     const { userId } = req.params;
-//     const { productId, quantity } = req.body;
-//     let cart = await Cart.findOne({ userId });
-//     if (!cart) {
-//       cart = await Cart.create({ userId, item: [] });
-//     }
-//     const existItem = cart.items.find((item) => item.productId === productId);
-//     if (existItem) {
-//       existItem.quantity += quantity;
-//     } else {
-//       cart.items.push({ productId, quantity });
-//     }
-//     await cart.save();
-//     return res.status(200).json(cart);
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// };
-//update quantity
+const mongoose = require("mongoose");
 exports.updateItem = async (req, res) => {
   try {
     const { userId, itemId } = req.params;
@@ -63,15 +29,22 @@ exports.updateItem = async (req, res) => {
 exports.removeItem = async (req, res) => {
   try {
     const { userId, itemId } = req.params;
+    if (!userId) return res.status(400).json({ error: "userId missing" });
+    if (!itemId) return res.status(400).json({ error: "itemId missing" });
 
+    if (!mongoose.Types.ObjectId.isValid(itemId)) {
+      return res.status(400).json({ error: "Invalid itemId" });
+    }
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: "Invalid userId" });
+    }
     const cart = await Cart.findOneAndUpdate(
-      { userId },
-      { $pull: { items: { _id: itemId } } },
+      { userId: new mongoose.Types.ObjectId(userId) },
+      { $pull: { items: { _id: new mongoose.Types.ObjectId(itemId) } } },
       { new: true }
     );
 
     if (!cart) return res.status(404).json({ error: "Cart not found" });
-
     return res.status(200).json(cart);
   } catch (err) {
     return res.status(500).json({ error: err.message });

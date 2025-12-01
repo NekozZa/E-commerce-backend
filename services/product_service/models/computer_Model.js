@@ -33,7 +33,7 @@ const variantSchema = new mongoose.Schema({
     },
   ],
 
-  totalPrice: { type: Number, required: true, default: 0 },
+  price: { type: Number, required: true, default: 0 },
   //   variantId: {
   //     type: mongoose.Schema.Types.ObjectId,
   //     ref: "Product",
@@ -85,7 +85,7 @@ const computerSchema = new mongoose.Schema(
       },
     ],
 
-    totalPrice: { type: Number, required: true, default: 0 },
+    price: { type: Number, required: true, default: 0 },
 
     variants: [variantSchema],
     optionGroups: [
@@ -125,7 +125,7 @@ computerSchema.pre("save", async function (next) {
     // Tính giá base
     const baseProducts = await Product.find({ _id: { $in: this.components } });
     const baseTotal = baseProducts.reduce((sum, p) => sum + (p.price || 0), 0);
-    this.totalPrice = baseTotal;
+    this.price = baseTotal;
 
     // Tạo map componentType -> product gốc
     const baseByType = new Map();
@@ -161,7 +161,7 @@ computerSchema.pre("save", async function (next) {
       }
 
       // Lưu giá cuối cùng
-      v.totalPrice = variantTotal;
+      v.price = variantTotal;
     }
 
     next();

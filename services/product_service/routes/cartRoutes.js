@@ -12,7 +12,7 @@ router.get("/:userId", controller.getCart);
 router.post("/:userId/items/total", controller.getManyItemsTotal);
 router.post("/:userId/addItem", controller.addItem);
 router.patch("/:userId/:itemId", controller.updateItem);
-router.delete("/:userId/:itemId", controller.removeItem);
+router.delete("/:userId/item/:itemId", controller.removeItem);
 router.delete("/:userId", controller.clearCart);
 
 module.exports = router;
