@@ -1,54 +1,63 @@
-const express = require('express')
-const axios = require('axios')
-const jwt = require('jsonwebtoken')
+const express = require("express");
+const axios = require("axios");
+const jwt = require("jsonwebtoken");
 
-const errorHandler = require('../utils/errorHandler')
+const errorHandler = require("../utils/errorHandler");
 
-const router = express.Router()
-const checkoutManager = axios.create({ baseURL: "http://checkout-manager:4000" })
+const router = express.Router();
+const checkoutManager = axios.create({
+  baseURL: "http://checkout-manager:4000",
+});
 
-const JWT_LOGIN_SECRET = process.env.JWT_LOGIN_SECRET
+const JWT_LOGIN_SECRET = process.env.JWT_LOGIN_SECRET;
 
-const ERROR_MESSAGE = "API: Something went wrong at Checkout Router"
+const ERROR_MESSAGE = "API: Something went wrong at Checkout Router";
 
-router.post('/', async (req, res) => {
-    try {
-        const authHeader = req.headers.authorization
-        var token = ''
-        
-        if (authHeader && authHeader.startsWith('Bearer ')) {
-            try {
-                token = authHeader.split(' ')[1]
-                jwt.verify(token, JWT_LOGIN_SECRET)
-            } catch {
-                return res.status(401).json({error: "Invalid credentials"})
-            }
-        } 
+router.post("/", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    var token = "";
 
-        const { email, deliveryAddress, items, couponId = undefined, applyLoyaltyPoint = false } = req.body
-        const response = await checkoutManager.post(`/checkout`, 
-            {  
-                email, deliveryAddress, items, couponId, applyLoyaltyPoint,
-                callbackURL: 'http://localhost:5000/api/checkout/callback' 
-            },
-
-            { 'headers': { 'Authorization': `Bearer ${token}` } }
-        )
-
-        res
-        .status(response.status)
-        .json({ paymentURL: response.data.paymentURL })
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      try {
+        token = authHeader.split(" ")[1];
+        jwt.verify(token, JWT_LOGIN_SECRET);
+      } catch {
+        return res.status(401).json({ error: "Invalid credentials" });
+      }
     }
 
-    catch (err) {
-        return errorHandler(res, err, ERROR_MESSAGE)
-    }
-})
+    const {
+      email,
+      deliveryAddress,
+      items,
+      couponId = undefined,
+      applyLoyaltyPoint = false,
+      callbackURL,
+    } = req.body;
+    const response = await checkoutManager.post(
+      `/checkout`,
+      {
+        email,
+        deliveryAddress,
+        items,
+        couponId,
+        applyLoyaltyPoint,
+        callbackURL:
+          callbackURL || "http://localhost:5000/api/checkout/callback",
+      },
 
-router.get('/callback', async (req, res) => {
-    res
-    .status(200)
-    .json({ message: "This is a homepage", queries: req.query })
-})
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
 
-module.exports = router
+    res.status(response.status).json({ paymentURL: response.data.paymentURL });
+  } catch (err) {
+    return errorHandler(res, err, ERROR_MESSAGE);
+  }
+});
+
+router.get("/callback", async (req, res) => {
+  res.status(200).json({ message: "This is a homepage", queries: req.query });
+});
+
+module.exports = router;

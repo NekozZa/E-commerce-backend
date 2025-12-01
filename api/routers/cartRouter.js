@@ -44,10 +44,12 @@ router.post("/:userId/addItem", async (req, res) => {
     return errorHandler(res, err, ERROR_MESSAGE);
   }
 });
-
 router.patch("/:userId/:itemId", async (req, res) => {
   try {
+    // const { userId, itemId } = req.query
     const { userId, itemId } = req.params;
+
+    // Truyền xuống service bên dưới
     const response = await cartService.patch(
       `/carts/${userId}/${itemId}`,
       req.body
@@ -59,12 +61,13 @@ router.patch("/:userId/:itemId", async (req, res) => {
   }
 });
 
-router.delete("/:userId/item/:itemId", async (req, res) => {
+router.delete("/:userId/:itemId", async (req, res) => {
   try {
+    //  const { userId, itemId } = req.query
+
     const { userId, itemId } = req.params;
-    const response = await cartService.delete(
-      `/carts/${userId}/item/${itemId}`
-    );
+
+    const response = await cartService.delete(`/carts/${userId}/${itemId}`);
 
     res.status(response.status).json({ cart: response.data });
   } catch (err) {
@@ -72,9 +75,13 @@ router.delete("/:userId/item/:itemId", async (req, res) => {
   }
 });
 
+// 3. Sửa route DELETE Cart (Clear cart)
 router.delete("/:userId", async (req, res) => {
   try {
+    //  const { userId } = req.query
+
     const { userId } = req.params;
+
     const response = await cartService.delete(`/carts/${userId}`);
 
     res.status(response.status).json({ cart: response.data });

@@ -11,6 +11,33 @@ const ERROR_MESSAGE = "API: Something went wrong at Order Router"
 
 router.use(authMiddleware)
 
+
+router.get('/analysis/orders', async (req, res) => {
+    try {
+        const queries = new URLSearchParams(req.query).toString()
+        const response = await orderService.get(`/orders/analysis?${queries}`, {
+            'headers': { 'Authorization': `Bearer ${req.token}` }
+        })
+        res.status(response.status).json(response.data)
+    } catch (err) {
+        return errorHandler(res, err, ERROR_MESSAGE)
+    }
+})
+
+
+router.get('/analysis/sold-product', async (req, res) => {
+    try {
+        const queries = new URLSearchParams(req.query).toString()
+        const response = await orderService.get(`/orders/analysis/sold-product?${queries}`, {
+            'headers': { 'Authorization': `Bearer ${req.token}` }
+        })
+        res.status(response.status).json(response.data)
+    } catch (err) {
+        return errorHandler(res, err, ERROR_MESSAGE)
+    }
+})
+
+
 router.get('/', async (req, res) => {
     try {
         const queries = new URLSearchParams(req.query).toString()
@@ -18,11 +45,8 @@ router.get('/', async (req, res) => {
             'headers': { 'Authorization': `Bearer ${req.token}` }
         })
 
-        res
-        .status(response.status)
-        .json({orders: response.data.orders})
+        res.status(response.status).json({orders: response.data.orders})
     }
-
     catch (err) {
         return errorHandler(res, err, ERROR_MESSAGE)
     }
@@ -35,15 +59,13 @@ router.get('/me', async (req, res) => {
             'headers': { 'Authorization': `Bearer ${req.token}` }
         })
 
-        res
-        .status(response.status)
-        .json({orders: response.data.orders})
+        res.status(response.status).json({orders: response.data.orders})
     }
-
     catch (err) {
         return errorHandler(res, err, ERROR_MESSAGE)
     }
 })
+
 
 router.get('/:id', async (req, res) => {
     try {
@@ -51,11 +73,8 @@ router.get('/:id', async (req, res) => {
             'headers': { 'Authorization': `Bearer ${req.token}` }
         })
 
-        res
-        .status(response.status)
-        .json({order: response.data.order})
+        res.status(response.status).json({order: response.data.order})
     }
-
     catch (err) {
         return errorHandler(res, err, ERROR_MESSAGE)
     }
@@ -70,11 +89,8 @@ router.put('/:id', async (req, res) => {
             'headers': { 'Authorization': `Bearer ${req.token}` }
         })
 
-        res
-        .status(response.status)
-        .json({updatedOrder: response.data.updatedOrder})
+        res.status(response.status).json({updatedOrder: response.data.updatedOrder})
     }
-
     catch (err) {
         return errorHandler(res, err, ERROR_MESSAGE)
     }
@@ -86,11 +102,8 @@ router.delete('/:id', async (req, res) => {
             'headers': { 'Authorization': `Bearer ${req.token}` }
         })
 
-        res
-        .status(response.status)
-        .json({deleteOrder: response.data.deleteOrder})
+        res.status(response.status).json({deleteOrder: response.data.deleteOrder})
     }
-
     catch (err) {
         return errorHandler(res, err, ERROR_MESSAGE)
     }

@@ -68,12 +68,32 @@ const getOrdersAnalysisByTime = async (req, res) => {
 
     const orders = await Order.aggregate([
         {   $match: match },
-        {   $unwind: '$items' },
+
+        // --- BƯỚC 1: LỌC TRÙNG (De-duplication) ---
+        // Gom nhóm các đơn hàng giống hệt nhau lại thành 1
+        {
+            $group: {
+                _id: { 
+                    customerId: "$customerId", 
+                    purchaseDate: "$purchaseDate",
+                    totalMoney: "$totalMoney"
+                },
+                uniqueDoc: { $first: "$$ROOT" } // Lấy 1 bản ghi đại diện
+            }
+        },
+        // --- BƯỚC 2: KHÔI PHỤC CẤU TRÚC ---
+        // Đưa bản ghi đại diện trở lại làm root document để tính toán tiếp
+        {
+            $replaceRoot: { newRoot: "$uniqueDoc" }
+        },
+
+        // --- BƯỚC 3: TÍNH TOÁN THỐNG KÊ (Như bình thường) ---
         {
             $group: {
                 _id: groupBy,
                 totalRevenue: { $sum: '$totalMoney' },
-                numberOfProducts: { $sum: '$items.quantity' },
+                // Tính tổng quantity trong mảng items (không cần unwind)
+                numberOfProducts: { $sum: { $sum: "$items.quantity" } },
                 numberOfOrders: { $sum: 1 }
             }
         },
@@ -166,11 +186,30 @@ const getSoldProductsByTime = async (req, res) => {
 
     const groupedOrders = await Order.aggregate([
         {   $match: match },
-        {   $unwind: '$items' },
+        
+        // --- ÁP DỤNG LỌC TRÙNG CHO CẢ HÀM NÀY ---
+        {
+            $group: {
+                _id: { 
+                    customerId: "$customerId", 
+                    purchaseDate: "$purchaseDate",
+                    totalMoney: "$totalMoney"
+                },
+                uniqueDoc: { $first: "$$ROOT" }
+            }
+        },
+        {
+            $replaceRoot: { newRoot: "$uniqueDoc" }
+        },
+        // -----------------------------------------
+
+        {   $unwind: '$items' }, // Unwind để tách sản phẩm
         {
             $group: {
                 _id: groupBy,
-                orders: { $push: "$$ROOT" }
+                orders: { $push: "$$ROOT" },
+                // Thêm trường tổng số lượng bán để frontend dễ sắp xếp
+                totalSold: { $sum: "$items.quantity" } 
             }
         },
         { $sort: sort }
@@ -179,7 +218,48 @@ const getSoldProductsByTime = async (req, res) => {
     res.status(200).json({groupedOrders: groupedOrders})
 }
 
+// Giữ nguyên hàm này nếu bạn dùng
+const getCustomerStats = async (req, res) => {
+    if (req.user.role != 'admin') { return res.status(403).json({error: "Forbidden actions"}) }
+    try {
+        const stats = await Order.aggregate([
+            { $match: { status: { $nin: ['Failed', 'Cancelled'] } } },
+            // Lọc trùng cho customer stats luôn cho chắc
+            {
+                $group: {
+                    _id: { customerId: "$customerId", purchaseDate: "$purchaseDate", totalMoney: "$totalMoney" },
+                    uniqueDoc: { $first: "$$ROOT" }
+                }
+            },
+            { $replaceRoot: { newRoot: "$uniqueDoc" } },
+            // Tính toán
+            {
+                $group: {
+                    _id: "$customerId",
+                    totalSpent: { $sum: "$totalMoney" },
+                    ordersCount: { $sum: 1 },
+                    lastActive: { $max: "$purchaseDate" }
+                }
+            }
+        ]);
+        const statsMap = {};
+        stats.forEach(item => {
+            if(item._id) {
+                statsMap[item._id.toString()] = {
+                    totalSpent: item.totalSpent,
+                    orders: item.ordersCount,
+                    lastActive: item.lastActive
+                };
+            }
+        });
+        res.status(200).json({ customerStats: statsMap });
+    } catch (error) {
+        res.status(500).json({ error: "Failed to aggregate customer stats" });
+    }
+}
+
 module.exports = {
     getOrdersAnalysisByTime,
-    getSoldProductsByTime
+    getSoldProductsByTime,
+    getCustomerStats
 }
