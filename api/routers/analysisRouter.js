@@ -41,7 +41,7 @@ router.get('/products', authMiddleware, async (req, res) => {
 
         res
         .status(response.status)
-        .json({groupedOrders: response.data.groupedOrders})
+        .json({productAnalysis: response.data.productAnalysis})
     } 
 
     catch (err) {

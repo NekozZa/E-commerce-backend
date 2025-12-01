@@ -608,6 +608,1285 @@ let coupons = [
   }
 ]
 
+let users = [
+  {
+    "_id": "6757c0010000000000000001",
+    "email": "user1@example.com",
+    "password": "$2a$10$VvBtuD739/.S3bl0H5UpD.dWB5T9zu8V1RdPUGYdbUfaLcF5OCLPu",
+    "role": "customer"
+  },
+  {
+    "_id": "6757c0010000000000000002",
+    "email": "user2@example.com",
+    "password": "$2a$10$mwTCgNcoQW.05lpbzoC/AOOt.jCTbc5vGcWV8qxRLilvPdajh7/uC",
+    "role": "customer"
+  },
+  {
+    "_id": "6757c0010000000000000003",
+    "email": "user3@example.com",
+    "password": "$2a$10$8ojeYtKMUK.nEvw3GG63felZvdqQRfC8LUIqSVJWJ0pZNsxIB9o.q",
+    "role": "customer"
+  },
+  {
+    "_id": "6757c0010000000000000004",
+    "email": "user4@example.com",
+    "password": "$2a$10$.hr./RnOAGvgkXRCa8cWDubflfMlRfR5XJKe2IvMoefSpvBgjf7Da",
+    "role": "customer"
+  },
+  {
+    "_id": "6757c0010000000000000005",
+    "email": "user5@example.com",
+    "password": "$2a$10$G2trRY9l2LGBksNJUnnBKefiXGTjZEd5bmcEfAPMziJ8V1MHX3LgC",
+    "role": "customer"
+  },
+  {
+    "_id": "6757c0010000000000000006",
+    "email": "user6@example.com",
+    "password": "$2a$10$8ABy9sFWip78jYlaq4t0RuqWYSCDBcOLf9zuM1xqFESdt99NzRcdC",
+    "role": "customer"
+  },
+  {
+    "_id": "6757c0010000000000000007",
+    "email": "user7@example.com",
+    "password": "$2a$10$ILciqS1J8clrj1CbbX2EWOtPn5N70Gx4qv6bfhAMxieCG9Q5elOwm",
+    "role": "customer"
+  },
+  {
+    "_id": "6757c0010000000000000008",
+    "email": "user8@example.com",
+    "password": "$2a$10$QRRfHMjknIfFxdXkXdCTa.zih4PjWxJFbg8L5yK8Jo3P.zG1b/fF.",
+    "role": "customer"
+  },
+  {
+    "_id": "6757c0010000000000000009",
+    "email": "user9@example.com",
+    "password": "$2a$10$cKFem2d2oVIicMjbHrsUFOpY67RKOhmkzAvZrZu49Mu8BV8YMzgka",
+    "role": "customer"
+  },
+  {
+    "_id": "6757c001000000000000000A",
+    "email": "user10@example.com",
+    "password": "$2a$10$oZu7/Oi2XzFfF.KmYj.65u4JTXG1535zzqAfWBEUqghODWFDA8WKK",
+    "role": "customer"
+  }
+]
+
+let customers = [
+  {
+    "_id": "6757c0010000000000000001",
+    "fullname": "User One",
+    "email": "user1@example.com",
+    "role": "customer",
+    "addresses": ["123 Street A, District 1, City X"],
+    "loyaltyPoint": 120
+  },
+  {
+    "_id": "6757c0010000000000000002",
+    "fullname": "User Two",
+    "email": "user2@example.com",
+    "role": "customer",
+    "addresses": ["45 Nguyen Trai, Ward 5, City Y"],
+    "loyaltyPoint": 315
+  },
+  {
+    "_id": "6757c0010000000000000003",
+    "fullname": "User Three",
+    "email": "user3@example.com",
+    "role": "customer",
+    "addresses": ["99 Le Loi, District 3, City Z"],
+    "loyaltyPoint": 280
+  },
+  {
+    "_id": "6757c0010000000000000004",
+    "fullname": "User Four",
+    "email": "user4@example.com",
+    "role": "customer",
+    "addresses": ["12 Tran Hung Dao, District 4, City X"],
+    "loyaltyPoint": 455
+  },
+  {
+    "_id": "6757c0010000000000000005",
+    "fullname": "User Five",
+    "email": "user5@example.com",
+    "role": "customer",
+    "addresses": ["7 Phan Chu Trinh, Ward 2, City Y"],
+    "loyaltyPoint": 390
+  },
+  {
+    "_id": "6757c0010000000000000006",
+    "fullname": "User Six",
+    "email": "user6@example.com",
+    "role": "customer",
+    "addresses": ["201 Hai Ba Trung, District 1, City Z"],
+    "loyaltyPoint": 150
+  },
+  {
+    "_id": "6757c0010000000000000007",
+    "fullname": "User Seven",
+    "email": "user7@example.com",
+    "role": "customer",
+    "addresses": ["88 Bach Dang, District 3, City X"],
+    "loyaltyPoint": 270
+  },
+  {
+    "_id": "6757c0010000000000000008",
+    "fullname": "User Eight",
+    "email": "user8@example.com",
+    "role": "customer",
+    "addresses": ["5 Hoang Hoa Tham, Ward 7, City Y"],
+    "loyaltyPoint": 498
+  },
+  {
+    "_id": "6757c0010000000000000009",
+    "fullname": "User Nine",
+    "email": "user9@example.com",
+    "role": "customer",
+    "addresses": ["321 Tran Phu, District 6, City Z"],
+    "loyaltyPoint": 305
+  },
+  {
+    "_id": "6757c001000000000000000A",
+    "fullname": "User Ten",
+    "email": "user10@example.com",
+    "role": "customer",
+    "addresses": ["10 Pasteur, District 1, City X"],
+    "loyaltyPoint": 421
+  }
+]
+
+let orders = [
+  {
+    "customerId": "6757c0010000000000000008",
+    "email": "user8@example.com",
+    "deliveryAddress": "5 Hoang Hoa Tham, Ward 7, City Y",
+    "purchaseDate": ISODate("2025-05-24T02:15:44Z"),
+    "totalMoney": 2700000,
+    "items": [
+      {
+        "productId": "6923e96123c33dfcf3141433",
+        "quantity": 3
+      },
+      {
+        "productId": "6923e96923c33dfcf3141435",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f4f"
+  },
+  {
+    "customerId": "6757c0010000000000000007",
+    "email": "user7@example.com",
+    "deliveryAddress": "88 Bach Dang, District 3, City X",
+    "purchaseDate": ISODate("2024-12-09T21:53:06Z"),
+    "totalMoney": 7500000,
+    "items": [
+      {
+        "productId": "6923e97423c33dfcf3141437",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000005",
+    "email": "user5@example.com",
+    "deliveryAddress": "7 Phan Chu Trinh, Ward 2, City Y",
+    "purchaseDate": ISODate("2025-07-13T12:55:21Z"),
+    "totalMoney": 3300000,
+    "items": [
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 224
+  },
+  {
+    "customerId": "6757c0010000000000000002",
+    "email": "user2@example.com",
+    "deliveryAddress": "45 Nguyen Trai, Ward 5, City Y",
+    "purchaseDate": ISODate("2024-05-28T14:03:23Z"),
+    "totalMoney": 3800000,
+    "items": [
+      {
+        "productId": "6921794fd37aef91e9063b97",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 108
+  },
+  {
+    "customerId": "6757c001000000000000000A",
+    "email": "user10@example.com",
+    "deliveryAddress": "10 Pasteur, District 1, City X",
+    "purchaseDate": ISODate("2025-03-02T00:47:03Z"),
+    "totalMoney": 2700000,
+    "items": [
+      {
+        "productId": "6923e96123c33dfcf3141433",
+        "quantity": 3
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f52"
+  },
+  {
+    "customerId": "6757c0010000000000000009",
+    "email": "user9@example.com",
+    "deliveryAddress": "321 Tran Phu, District 6, City Z",
+    "purchaseDate": ISODate("2025-09-16T03:01:27Z"),
+    "totalMoney": 12750000,
+    "items": [
+      {
+        "productId": "6922c705c9e0de915584a818",
+        "quantity": 1
+      },
+      {
+        "productId": "6923f4ed390a789470182ea2",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f4c",
+    "loyaltyPoint": 188
+  },
+  {
+    "customerId": "6757c0010000000000000003",
+    "email": "user3@example.com",
+    "deliveryAddress": "99 Le Loi, District 3, City Z",
+    "purchaseDate": ISODate("2024-08-06T10:37:58Z"),
+    "totalMoney": 450000,
+    "items": [
+      {
+        "productId": "6923e96923c33dfcf3141435",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000001",
+    "email": "user1@example.com",
+    "deliveryAddress": "123 Street A, District 1, City X",
+    "purchaseDate": ISODate("2024-03-18T06:42:12Z"),
+    "totalMoney": 25450000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f0a3",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f55"
+  },
+  {
+    "customerId": "6757c0010000000000000004",
+    "email": "user4@example.com",
+    "deliveryAddress": "12 Tran Hung Dao, District 4, City X",
+    "purchaseDate": ISODate("2024-12-25T19:20:00Z"),
+    "totalMoney": 1650000,
+    "items": [
+      {
+        "productId": "6923e95923c33dfcf3141431",
+        "quantity": 1
+      },
+      {
+        "productId": "6923e94123c33dfcf314142d",
+        "quantity": 0
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000006",
+    "email": "user6@example.com",
+    "deliveryAddress": "201 Hai Ba Trung, District 1, City Z",
+    "purchaseDate": ISODate("2025-11-22T07:33:51Z"),
+    "totalMoney": 3800000,
+    "items": [
+      {
+        "productId": "6921794fd37aef91e9063b97",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 251
+  },
+  {
+    "customerId": "6757c0010000000000000007",
+    "email": "user7@example.com",
+    "deliveryAddress": "88 Bach Dang, District 3, City X",
+    "purchaseDate": ISODate("2024-04-02T05:16:40Z"),
+    "totalMoney": 5700000,
+    "items": [
+      {
+        "productId": "6923e97423c33dfcf3141437",
+        "quantity": 1
+      },
+      {
+        "productId": "6923e96923c33dfcf3141435",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f49"
+  },
+  {
+    "customerId": "6757c0010000000000000009",
+    "email": "user9@example.com",
+    "deliveryAddress": "321 Tran Phu, District 6, City Z",
+    "purchaseDate": ISODate("2025-02-14T23:44:17Z"),
+    "totalMoney": 3050000,
+    "items": [
+      {
+        "productId": "6923e94123c33dfcf314142d",
+        "quantity": 1
+      },
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 2
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 282
+  },
+  {
+    "customerId": "6757c0010000000000000005",
+    "email": "user5@example.com",
+    "deliveryAddress": "7 Phan Chu Trinh, Ward 2, City Y",
+    "purchaseDate": ISODate("2024-09-03T09:05:02Z"),
+    "totalMoney": 1200000,
+    "items": [
+      {
+        "productId": "6923e95923c33dfcf3141431",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000001",
+    "email": "user1@example.com",
+    "deliveryAddress": "123 Street A, District 1, City X",
+    "purchaseDate": ISODate("2024-01-01T00:00:59Z"),
+    "totalMoney": 19750000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f091",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f54"
+  },
+  {
+    "customerId": "6757c0010000000000000003",
+    "email": "user3@example.com",
+    "deliveryAddress": "99 Le Loi, District 3, City Z",
+    "purchaseDate": ISODate("2025-06-30T11:12:18Z"),
+    "totalMoney": 19300000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f086",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 253
+  },
+  {
+    "customerId": "6757c0010000000000000008",
+    "email": "user8@example.com",
+    "deliveryAddress": "5 Hoang Hoa Tham, Ward 7, City Y",
+    "purchaseDate": ISODate("2024-11-08T18:51:37Z"),
+    "totalMoney": 5100000,
+    "items": [
+      {
+        "productId": "6923e97423c33dfcf3141437",
+        "quantity": 1
+      },
+      {
+        "productId": "6923f4ed390a789470182ea2",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000002",
+    "email": "user2@example.com",
+    "deliveryAddress": "45 Nguyen Trai, Ward 5, City Y",
+    "purchaseDate": ISODate("2024-06-19T04:44:55Z"),
+    "totalMoney": 6000000,
+    "items": [
+      {
+        "productId": "6923e97423c33dfcf3141437",
+        "quantity": 0
+      },
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 2
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f53"
+  },
+  {
+    "customerId": "6757c0010000000000000004",
+    "email": "user4@example.com",
+    "deliveryAddress": "12 Tran Hung Dao, District 4, City X",
+    "purchaseDate": ISODate("2025-10-04T15:30:09Z"),
+    "totalMoney": 2500000,
+    "items": [
+      {
+        "productId": "6922c71ac9e0de915584a81a",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 114
+  },
+  {
+    "customerId": "6757c0010000000000000006",
+    "email": "user6@example.com",
+    "deliveryAddress": "201 Hai Ba Trung, District 1, City Z",
+    "purchaseDate": ISODate("2024-02-10T02:22:36Z"),
+    "totalMoney": 1650000,
+    "items": [
+      {
+        "productId": "6923e95923c33dfcf3141431",
+        "quantity": 1
+      },
+      {
+        "productId": "6923e94123c33dfcf314142d",
+        "quantity": 0
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000005",
+    "email": "user5@example.com",
+    "deliveryAddress": "7 Phan Chu Trinh, Ward 2, City Y",
+    "purchaseDate": ISODate("2024-10-21T09:11:03Z"),
+    "totalMoney": 2550000,
+    "items": [
+      {
+        "productId": "6922c71ac9e0de915584a81a",
+        "quantity": 1
+      },
+      {
+        "productId": "6923e94123c33dfcf314142d",
+        "quantity": 0
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f47",
+    "loyaltyPoint": 289
+  },
+  {
+    "customerId": "6757c0010000000000000001",
+    "email": "user1@example.com",
+    "deliveryAddress": "123 Street A, District 1, City X",
+    "purchaseDate": ISODate("2025-01-30T22:09:58Z"),
+    "totalMoney": 15200000,
+    "items": [
+      {
+        "productId": "6922c705c9e0de915584a818",
+        "quantity": 1
+      },
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000008",
+    "email": "user8@example.com",
+    "deliveryAddress": "5 Hoang Hoa Tham, Ward 7, City Y",
+    "purchaseDate": ISODate("2025-08-11T13:14:27Z"),
+    "totalMoney": 7600000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f086",
+        "quantity": 0
+      },
+      {
+        "productId": "6921794fd37aef91e9063b97",
+        "quantity": 2
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f50"
+  },
+  {
+    "customerId": "6757c0010000000000000002",
+    "email": "user2@example.com",
+    "deliveryAddress": "45 Nguyen Trai, Ward 5, City Y",
+    "purchaseDate": ISODate("2024-07-17T07:06:34Z"),
+    "totalMoney": 900000,
+    "items": [
+      {
+        "productId": "6923e94123c33dfcf314142d",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000004",
+    "email": "user4@example.com",
+    "deliveryAddress": "12 Tran Hung Dao, District 4, City X",
+    "purchaseDate": ISODate("2025-04-05T01:25:12Z"),
+    "totalMoney": 2850000,
+    "items": [
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 1
+      },
+      {
+        "productId": "6923e95123c33dfcf314142f",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 140
+  },
+  {
+    "customerId": "6757c0010000000000000006",
+    "email": "user6@example.com",
+    "deliveryAddress": "201 Hai Ba Trung, District 1, City Z",
+    "purchaseDate": ISODate("2025-06-02T20:38:00Z"),
+    "totalMoney": 750000,
+    "items": [
+      {
+        "productId": "6923e96123c33dfcf3141433",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000009",
+    "email": "user9@example.com",
+    "deliveryAddress": "321 Tran Phu, District 6, City Z",
+    "purchaseDate": ISODate("2024-11-11T11:11:11Z"),
+    "totalMoney": 19300000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f086",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f59",
+    "loyaltyPoint": 182
+  },
+  {
+    "customerId": "6757c0010000000000000001",
+    "email": "user1@example.com",
+    "deliveryAddress": "123 Street A, District 1, City X",
+    "purchaseDate": ISODate("2024-03-05T16:00:00Z"),
+    "totalMoney": 3300000,
+    "items": [
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 1
+      },
+      {
+        "productId": "6923e96923c33dfcf3141435",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000005",
+    "email": "user5@example.com",
+    "deliveryAddress": "7 Phan Chu Trinh, Ward 2, City Y",
+    "purchaseDate": ISODate("2025-12-01T00:00:00Z"),
+    "totalMoney": 25450000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f0a3",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f56"
+  },
+  {
+    "customerId": "6757c0010000000000000003",
+    "email": "user3@example.com",
+    "deliveryAddress": "99 Le Loi, District 3, City Z",
+    "purchaseDate": ISODate("2024-02-28T08:22:44Z"),
+    "totalMoney": 5700000,
+    "items": [
+      {
+        "productId": "6923e97423c33dfcf3141437",
+        "quantity": 0
+      },
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 268
+  },
+  {
+    "customerId": "6757c0010000000000000008",
+    "email": "user8@example.com",
+    "deliveryAddress": "5 Hoang Hoa Tham, Ward 7, City Y",
+    "purchaseDate": ISODate("2024-06-01T03:30:30Z"),
+    "totalMoney": 450000,
+    "items": [
+      {
+        "productId": "6923e96923c33dfcf3141435",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000002",
+    "email": "user2@example.com",
+    "deliveryAddress": "45 Nguyen Trai, Ward 5, City Y",
+    "purchaseDate": ISODate("2025-07-04T07:07:07Z"),
+    "totalMoney": 7600000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f086",
+        "quantity": 0
+      },
+      {
+        "productId": "6923e97423c33dfcf3141437",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f51"
+  },
+  {
+    "customerId": "6757c0010000000000000006",
+    "email": "user6@example.com",
+    "deliveryAddress": "201 Hai Ba Trung, District 1, City Z",
+    "purchaseDate": ISODate("2024-09-09T12:12:12Z"),
+    "totalMoney": 1650000,
+    "items": [
+      {
+        "productId": "6923e95923c33dfcf3141431",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 115
+  },
+  {
+    "customerId": "6757c0010000000000000001",
+    "email": "user1@example.com",
+    "deliveryAddress": "123 Street A, District 1, City X",
+    "purchaseDate": ISODate("2024-10-10T10:10:10Z"),
+    "totalMoney": 1650000,
+    "items": [
+      {
+        "productId": "6923e95923c33dfcf3141431",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000009",
+    "email": "user9@example.com",
+    "deliveryAddress": "321 Tran Phu, District 6, City Z",
+    "purchaseDate": ISODate("2024-05-05T05:05:05Z"),
+    "totalMoney": 3300000,
+    "items": [
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 1
+      },
+      {
+        "productId": "6923e96123c33dfcf3141433",
+        "quantity": 2
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f48"
+  },
+  {
+    "customerId": "6757c0010000000000000005",
+    "email": "user5@example.com",
+    "deliveryAddress": "7 Phan Chu Trinh, Ward 2, City Y",
+    "purchaseDate": ISODate("2024-12-01T12:00:00Z"),
+    "totalMoney": 8800000,
+    "items": [
+      {
+        "productId": "6922c705c9e0de915584a818",
+        "quantity": 0
+      },
+      {
+        "productId": "6923e97423c33dfcf3141437",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000003",
+    "email": "user3@example.com",
+    "deliveryAddress": "99 Le Loi, District 3, City Z",
+    "purchaseDate": ISODate("2025-03-15T09:40:00Z"),
+    "totalMoney": 3300000,
+    "items": [
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 1
+      },
+      {
+        "productId": "6923e96923c33dfcf3141435",
+        "quantity": 0
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 140
+  },
+  {
+    "customerId": "6757c0010000000000000002",
+    "email": "user2@example.com",
+    "deliveryAddress": "45 Nguyen Trai, Ward 5, City Y",
+    "purchaseDate": ISODate("2024-11-20T20:20:20Z"),
+    "totalMoney": 7500000,
+    "items": [
+      {
+        "productId": "6923e97423c33dfcf3141437",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f4b",
+    "loyaltyPoint": 199
+  },
+  {
+    "customerId": "6757c0010000000000000006",
+    "email": "user6@example.com",
+    "deliveryAddress": "201 Hai Ba Trung, District 1, City Z",
+    "purchaseDate": ISODate("2024-08-30T14:14:14Z"),
+    "totalMoney": 19750000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f091",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000001",
+    "email": "user1@example.com",
+    "deliveryAddress": "123 Street A, District 1, City X",
+    "purchaseDate": ISODate("2025-09-30T09:09:09Z"),
+    "totalMoney": 750000,
+    "items": [
+      {
+        "productId": "6923e96123c33dfcf3141433",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 150
+  },
+  {
+    "customerId": "6757c0010000000000000009",
+    "email": "user9@example.com",
+    "deliveryAddress": "321 Tran Phu, District 6, City Z",
+    "purchaseDate": ISODate("2024-01-15T08:08:08Z"),
+    "totalMoney": 25450000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f0a3",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f52"
+  },
+  {
+    "customerId": "6757c0010000000000000005",
+    "email": "user5@example.com",
+    "deliveryAddress": "7 Phan Chu Trinh, Ward 2, City Y",
+    "purchaseDate": ISODate("2024-04-04T04:44:44Z"),
+    "totalMoney": 3800000,
+    "items": [
+      {
+        "productId": "6921794fd37aef91e9063b97",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000008",
+    "email": "user8@example.com",
+    "deliveryAddress": "5 Hoang Hoa Tham, Ward 7, City Y",
+    "purchaseDate": ISODate("2025-05-01T05:01:05Z"),
+    "totalMoney": 3300000,
+    "items": [
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 1
+      },
+      {
+        "productId": "6923e96923c33dfcf3141435",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f50",
+    "loyaltyPoint": 173
+  },
+  {
+    "customerId": "6757c0010000000000000002",
+    "email": "user2@example.com",
+    "deliveryAddress": "45 Nguyen Trai, Ward 5, City Y",
+    "purchaseDate": ISODate("2024-03-12T12:12:12Z"),
+    "totalMoney": 1200000,
+    "items": [
+      {
+        "productId": "6923e95923c33dfcf3141431",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000004",
+    "email": "user4@example.com",
+    "deliveryAddress": "12 Tran Hung Dao, District 4, City X",
+    "purchaseDate": ISODate("2025-07-21T21:21:21Z"),
+    "totalMoney": 3050000,
+    "items": [
+      {
+        "productId": "6923e94123c33dfcf314142d",
+        "quantity": 1
+      },
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 2
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f58"
+  },
+  {
+    "customerId": "6757c0010000000000000006",
+    "email": "user6@example.com",
+    "deliveryAddress": "201 Hai Ba Trung, District 1, City Z",
+    "purchaseDate": ISODate("2024-01-20T20:20:20Z"),
+    "totalMoney": 19300000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f086",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 199
+  },
+  {
+    "customerId": "6757c0010000000000000007",
+    "email": "user7@example.com",
+    "deliveryAddress": "88 Bach Dang, District 3, City X",
+    "purchaseDate": ISODate("2024-02-02T02:02:02Z"),
+    "totalMoney": 3800000,
+    "items": [
+      {
+        "productId": "6921794fd37aef91e9063b97",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000009",
+    "email": "user9@example.com",
+    "deliveryAddress": "321 Tran Phu, District 6, City Z",
+    "purchaseDate": ISODate("2025-10-10T10:10:10Z"),
+    "totalMoney": 19750000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f091",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f54",
+    "loyaltyPoint": 144
+  },
+  {
+    "customerId": "6757c0010000000000000008",
+    "email": "user8@example.com",
+    "deliveryAddress": "5 Hoang Hoa Tham, Ward 7, City Y",
+    "purchaseDate": ISODate("2025-02-02T02:02:02Z"),
+    "totalMoney": 2500000,
+    "items": [
+      {
+        "productId": "6922c71ac9e0de915584a81a",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000001",
+    "email": "user1@example.com",
+    "deliveryAddress": "123 Street A, District 1, City X",
+    "purchaseDate": ISODate("2024-05-15T15:15:15Z"),
+    "totalMoney": 2850000,
+    "items": [
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 1
+      },
+      {
+        "productId": "6923e95123c33dfcf314142f",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 173
+  },
+  {
+    "customerId": "6757c0010000000000000005",
+    "email": "user5@example.com",
+    "deliveryAddress": "7 Phan Chu Trinh, Ward 2, City Y",
+    "purchaseDate": ISODate("2024-07-07T07:07:07Z"),
+    "totalMoney": 900000,
+    "items": [
+      {
+        "productId": "6923e94123c33dfcf314142d",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f4e"
+  },
+  {
+    "customerId": "6757c0010000000000000003",
+    "email": "user3@example.com",
+    "deliveryAddress": "99 Le Loi, District 3, City Z",
+    "purchaseDate": ISODate("2025-01-01T01:01:01Z"),
+    "totalMoney": 3300000,
+    "items": [
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000002",
+    "email": "user2@example.com",
+    "deliveryAddress": "45 Nguyen Trai, Ward 5, City Y",
+    "purchaseDate": ISODate("2024-10-30T23:23:23Z"),
+    "totalMoney": 3050000,
+    "items": [
+      {
+        "productId": "6923e94123c33dfcf314142d",
+        "quantity": 1
+      },
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 2
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 116
+  },
+  {
+    "customerId": "6757c0010000000000000004",
+    "email": "user4@example.com",
+    "deliveryAddress": "12 Tran Hung Dao, District 4, City X",
+    "purchaseDate": ISODate("2025-06-06T06:06:06Z"),
+    "totalMoney": 25450000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f0a3",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f57"
+  },
+  {
+    "customerId": "6757c0010000000000000006",
+    "email": "user6@example.com",
+    "deliveryAddress": "201 Hai Ba Trung, District 1, City Z",
+    "purchaseDate": ISODate("2024-09-01T09:09:09Z"),
+    "totalMoney": 2700000,
+    "items": [
+      {
+        "productId": "6923e96123c33dfcf3141433",
+        "quantity": 3
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 145
+  },
+  {
+    "customerId": "6757c0010000000000000009",
+    "email": "user9@example.com",
+    "deliveryAddress": "321 Tran Phu, District 6, City Z",
+    "purchaseDate": ISODate("2024-08-08T08:08:08Z"),
+    "totalMoney": 3800000,
+    "items": [
+      {
+        "productId": "6921794fd37aef91e9063b97",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000001",
+    "email": "user1@example.com",
+    "deliveryAddress": "123 Street A, District 1, City X",
+    "purchaseDate": ISODate("2024-11-11T11:11:11Z"),
+    "totalMoney": 7500000,
+    "items": [
+      {
+        "productId": "6923e97423c33dfcf3141437",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f49",
+    "loyaltyPoint": 200
+  },
+  {
+    "customerId": "6757c0010000000000000005",
+    "email": "user5@example.com",
+    "deliveryAddress": "7 Phan Chu Trinh, Ward 2, City Y",
+    "purchaseDate": ISODate("2025-05-05T05:05:05Z"),
+    "totalMoney": 19300000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f086",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000008",
+    "email": "user8@example.com",
+    "deliveryAddress": "5 Hoang Hoa Tham, Ward 7, City Y",
+    "purchaseDate": ISODate("2024-02-22T22:22:22Z"),
+    "totalMoney": 3800000,
+    "items": [
+      {
+        "productId": "6921794fd37aef91e9063b97",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f4d"
+  },
+  {
+    "customerId": "6757c0010000000000000002",
+    "email": "user2@example.com",
+    "deliveryAddress": "45 Nguyen Trai, Ward 5, City Y",
+    "purchaseDate": ISODate("2024-12-12T12:12:12Z"),
+    "totalMoney": 1350000,
+    "items": [
+      {
+        "productId": "6923f4ed390a789470182ea2",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 180
+  },
+  {
+    "customerId": "6757c0010000000000000006",
+    "email": "user6@example.com",
+    "deliveryAddress": "201 Hai Ba Trung, District 1, City Z",
+    "purchaseDate": ISODate("2024-06-06T06:06:06Z"),
+    "totalMoney": 12750000,
+    "items": [
+      {
+        "productId": "6922c705c9e0de915584a818",
+        "quantity": 1
+      },
+      {
+        "productId": "6923f4ed390a789470182ea2",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f4c"
+  },
+  {
+    "customerId": "6757c0010000000000000003",
+    "email": "user3@example.com",
+    "deliveryAddress": "99 Le Loi, District 3, City Z",
+    "purchaseDate": ISODate("2025-11-30T11:11:11Z"),
+    "totalMoney": 450000,
+    "items": [
+      {
+        "productId": "6923e96923c33dfcf3141435",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 140
+  },
+  {
+    "customerId": "6757c0010000000000000001",
+    "email": "user1@example.com",
+    "deliveryAddress": "123 Street A, District 1, City X",
+    "purchaseDate": ISODate("2024-03-03T03:03:03Z"),
+    "totalMoney": 25450000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f0a3",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000009",
+    "email": "user9@example.com",
+    "deliveryAddress": "321 Tran Phu, District 6, City Z",
+    "purchaseDate": ISODate("2025-04-04T04:44:44Z"),
+    "totalMoney": 3800000,
+    "items": [
+      {
+        "productId": "6921794fd37aef91e9063b97",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f51",
+    "loyaltyPoint": 220
+  },
+  {
+    "customerId": "6757c0010000000000000005",
+    "email": "user5@example.com",
+    "deliveryAddress": "7 Phan Chu Trinh, Ward 2, City Y",
+    "purchaseDate": ISODate("2024-09-09T09:09:09Z"),
+    "totalMoney": 750000,
+    "items": [
+      {
+        "productId": "6923e96123c33dfcf3141433",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000007",
+    "email": "user7@example.com",
+    "deliveryAddress": "88 Bach Dang, District 3, City X",
+    "purchaseDate": ISODate("2024-04-04T04:04:04Z"),
+    "totalMoney": 19300000,
+    "items": [
+      {
+        "productId": "692a7ef21ac548f195b3f086",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 210
+  },
+  {
+    "customerId": "6757c0010000000000000002",
+    "email": "user2@example.com",
+    "deliveryAddress": "45 Nguyen Trai, Ward 5, City Y",
+    "purchaseDate": ISODate("2024-08-20T20:20:20Z"),
+    "totalMoney": 2700000,
+    "items": [
+      {
+        "productId": "6923e96123c33dfcf3141433",
+        "quantity": 3
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f4a"
+  },
+  {
+    "customerId": "6757c0010000000000000004",
+    "email": "user4@example.com",
+    "deliveryAddress": "12 Tran Hung Dao, District 4, City X",
+    "purchaseDate": ISODate("2025-08-08T08:08:08Z"),
+    "totalMoney": 3300000,
+    "items": [
+      {
+        "productId": "6923f523390a789470182ea5",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 187
+  },
+  {
+    "customerId": "6757c0010000000000000006",
+    "email": "user6@example.com",
+    "deliveryAddress": "201 Hai Ba Trung, District 1, City Z",
+    "purchaseDate": ISODate("2025-11-01T11:11:11Z"),
+    "totalMoney": 9500000,
+    "items": [
+      {
+        "productId": "6922c705c9e0de915584a818",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "couponId": "692c160069b31ed43dce5f4f"
+  },
+  {
+    "customerId": "6757c0010000000000000008",
+    "email": "user8@example.com",
+    "deliveryAddress": "5 Hoang Hoa Tham, Ward 7, City Y",
+    "purchaseDate": ISODate("2024-12-12T12:00:00Z"),
+    "totalMoney": 1350000,
+    "items": [
+      {
+        "productId": "6923f4ed390a789470182ea2",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid"
+  },
+  {
+    "customerId": "6757c0010000000000000001",
+    "email": "user1@example.com",
+    "deliveryAddress": "123 Street A, District 1, City X",
+    "purchaseDate": ISODate("2024-05-05T05:05:05Z"),
+    "totalMoney": 3300000,
+    "items": [
+      {
+        "productId": "6922c71ac9e0de915584a81a",
+        "quantity": 1
+      },
+      {
+        "productId": "6923e94123c33dfcf314142d",
+        "quantity": 1
+      }
+    ],
+    "status": "Paid",
+    "loyaltyPoint": 128
+  }
+]
+
 db.products.drop();
 db.products.insertMany(products);
 db.carts.insertMany(carts);
@@ -615,5 +1894,15 @@ db.carts.insertMany(carts);
 db = db.getSiblingDB("coupons")
 db.coupons.drop()
 db.coupons.insertMany(coupons)
+
+db = db.getSiblingDB("auth")
+db.users.insertOne({ email: "admin@gmail.com", password: "$2a$10$adAVcBam05yfpy3zo2KE1eiyWyBoWIKXSx0ychgpQeLyo2GinFHuO", role: 'admin' })
+db.users.insertMany(users)
+
+db = db.getSiblingDB("customers")
+db.customers.insertMany(customers)
+
+db = db.getSiblingDB("orders")
+db.orders.insertMany(orders)
 
 print("Products data inserted successfully!");

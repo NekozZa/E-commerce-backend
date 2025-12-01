@@ -59,7 +59,7 @@ const getOrdersAnalysisByTime = async (req, res) => {
     }
 
     const match = {
-        status: { $ne: 'Pending' }
+        status: { $nin: ['Pending', 'Failed'] }
     }
 
     if (startDate && endDate) {
@@ -111,6 +111,13 @@ const getSoldProductsByTime = async (req, res) => {
         sort = { '_id.year': 1, '_id.month': 1, '_id.day': 1 }
     } else {
         switch (by) {
+            case 'product':
+                groupBy = { 
+                    productId: "$items.productId"
+                }
+                
+                sort = { '_id': 1 }
+                break
             case 'year':
                 groupBy = { 
                     productId: "$items.productId",
@@ -150,7 +157,7 @@ const getSoldProductsByTime = async (req, res) => {
     }
 
     const match = {
-        status: { $ne: 'Pending' }
+        status: { $nin: ['Pending', 'Failed'] }
     }
 
     if (startDate && endDate) {
