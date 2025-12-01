@@ -49,7 +49,7 @@ router.patch("/:userId/:itemId", async (req, res) => {
     // const { userId, itemId } = req.query
     const { userId, itemId } = req.params;
 
-    // Truyền xuống service bên dưới
+    
     const response = await cartService.patch(
       `/carts/${userId}/${itemId}`,
       req.body
@@ -75,7 +75,7 @@ router.delete("/:userId/:itemId", async (req, res) => {
   }
 });
 
-// 3. Sửa route DELETE Cart (Clear cart)
+
 router.delete("/:userId", async (req, res) => {
   try {
     //  const { userId } = req.query

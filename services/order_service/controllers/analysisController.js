@@ -69,8 +69,7 @@ const getOrdersAnalysisByTime = async (req, res) => {
     const orders = await Order.aggregate([
         {   $match: match },
 
-        // --- BƯỚC 1: LỌC TRÙNG (De-duplication) ---
-        // Gom nhóm các đơn hàng giống hệt nhau lại thành 1
+
         {
             $group: {
                 _id: { 
@@ -78,21 +77,19 @@ const getOrdersAnalysisByTime = async (req, res) => {
                     purchaseDate: "$purchaseDate",
                     totalMoney: "$totalMoney"
                 },
-                uniqueDoc: { $first: "$$ROOT" } // Lấy 1 bản ghi đại diện
+                uniqueDoc: { $first: "$$ROOT" } 
             }
         },
-        // --- BƯỚC 2: KHÔI PHỤC CẤU TRÚC ---
-        // Đưa bản ghi đại diện trở lại làm root document để tính toán tiếp
+   
         {
             $replaceRoot: { newRoot: "$uniqueDoc" }
         },
 
-        // --- BƯỚC 3: TÍNH TOÁN THỐNG KÊ (Như bình thường) ---
+       
         {
             $group: {
                 _id: groupBy,
                 totalRevenue: { $sum: '$totalMoney' },
-                // Tính tổng quantity trong mảng items (không cần unwind)
                 numberOfProducts: { $sum: { $sum: "$items.quantity" } },
                 numberOfOrders: { $sum: 1 }
             }
@@ -187,7 +184,6 @@ const getSoldProductsByTime = async (req, res) => {
     const groupedOrders = await Order.aggregate([
         {   $match: match },
         
-        // --- ÁP DỤNG LỌC TRÙNG CHO CẢ HÀM NÀY ---
         {
             $group: {
                 _id: { 
@@ -203,12 +199,11 @@ const getSoldProductsByTime = async (req, res) => {
         },
         // -----------------------------------------
 
-        {   $unwind: '$items' }, // Unwind để tách sản phẩm
+        {   $unwind: '$items' }, 
         {
             $group: {
                 _id: groupBy,
                 orders: { $push: "$$ROOT" },
-                // Thêm trường tổng số lượng bán để frontend dễ sắp xếp
                 totalSold: { $sum: "$items.quantity" } 
             }
         },
@@ -218,13 +213,12 @@ const getSoldProductsByTime = async (req, res) => {
     res.status(200).json({groupedOrders: groupedOrders})
 }
 
-// Giữ nguyên hàm này nếu bạn dùng
+
 const getCustomerStats = async (req, res) => {
     if (req.user.role != 'admin') { return res.status(403).json({error: "Forbidden actions"}) }
     try {
         const stats = await Order.aggregate([
             { $match: { status: { $nin: ['Failed', 'Cancelled'] } } },
-            // Lọc trùng cho customer stats luôn cho chắc
             {
                 $group: {
                     _id: { customerId: "$customerId", purchaseDate: "$purchaseDate", totalMoney: "$totalMoney" },
@@ -232,7 +226,6 @@ const getCustomerStats = async (req, res) => {
                 }
             },
             { $replaceRoot: { newRoot: "$uniqueDoc" } },
-            // Tính toán
             {
                 $group: {
                     _id: "$customerId",
