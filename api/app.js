@@ -14,6 +14,7 @@ const checkoutRouter = require('./routers/checkoutRouter')
 const analysisRouter = require('./routers/analysisRouter')
 const productRouter = require('./routers/productRouter')
 const cartRouter = require('./routers/cartRouter')
+const reviewRouter = require('./routers/reviewRouter')
 
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
@@ -41,6 +42,7 @@ app.use('/api/checkout', checkoutRouter)
 app.use('/api/analysis', analysisRouter)
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
+app.use('/api/reviews', reviewRouter)
 
 app.listen(PORT, () => {
     console.log(`API Gateway is running on port: ${PORT}`)

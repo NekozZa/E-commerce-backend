@@ -1886,6 +1886,129 @@ let orders = [
     "loyaltyPoint": 128
   }
 ]
+let reviews = [
+  // --- 1. Intel i5 12400F (ID: 6921794fd37aef91e9063b97) ---
+  {
+    _id: ObjectId("692dcfbb35cc06c082660950"),
+    productId: "6921794fd37aef91e9063b97",
+    customerId: "6757c0010000000000000001",
+    customerName: "Nguyễn Văn A",
+    rating: 5,
+    comment: "Con chip quốc dân, hiệu năng trên giá thành quá ổn. Chơi game tẹt ga không lo nghẽn.",
+    createdAt: ISODate("2025-11-25T10:00:00.000Z"),
+    updatedAt: ISODate("2025-11-25T10:00:00.000Z"),
+    __v: 0
+  },
+  {
+    _id: ObjectId("692dcfbb35cc06c082660951"),
+    productId: "6921794fd37aef91e9063b97",
+    customerId: "6757c0010000000000000002",
+    customerName: "Trần Thị B",
+    rating: 4,
+    comment: "Ngon, mát, nhưng quạt tản nhiệt đi kèm hơi ồn khi full load. Nên mua tản rời.",
+    createdAt: ISODate("2025-11-26T14:30:00.000Z"),
+    updatedAt: ISODate("2025-11-26T14:30:00.000Z"),
+    __v: 0
+  },
+
+  // --- 2. Intel Core i7-12700K (ID: 6922c705c9e0de915584a818) ---
+  {
+    _id: ObjectId("692dcfbb35cc06c082660952"),
+    productId: "6922c705c9e0de915584a818",
+    customerId: "6757c0010000000000000003",
+    customerName: "Lê Văn C",
+    rating: 5,
+    comment: "Render video 4K mượt mà, xung nhịp cao. Đáng đồng tiền bát gạo.",
+    createdAt: ISODate("2025-11-27T09:15:00.000Z"),
+    updatedAt: ISODate("2025-11-27T09:15:00.000Z"),
+    __v: 0
+  },
+  {
+    _id: ObjectId("692dcfbb35cc06c082660953"),
+    productId: "6922c705c9e0de915584a818",
+    customerId: "6757c0010000000000000004",
+    customerName: "Phạm Minh D",
+    rating: 5,
+    comment: "Best choice cho anh em làm đồ họa và stream.",
+    createdAt: ISODate("2025-11-28T11:20:00.000Z"),
+    updatedAt: ISODate("2025-11-28T11:20:00.000Z"),
+    __v: 0
+  },
+
+  // --- 3. Samsung 980 1TB NVMe (ID: 6922c71ac9e0de915584a81a) ---
+  {
+    _id: ObjectId("692dcfbb35cc06c082660954"),
+    productId: "6922c71ac9e0de915584a81a",
+    customerId: "6757c0010000000000000005",
+    customerName: "Hoàng Tuấn E",
+    rating: 5,
+    comment: "Tốc độ bàn thờ, copy file 10GB mất có vài giây. Samsung chưa bao giờ làm thất vọng.",
+    createdAt: ISODate("2025-11-25T16:45:00.000Z"),
+    updatedAt: ISODate("2025-11-25T16:45:00.000Z"),
+    __v: 0
+  },
+  {
+    _id: ObjectId("692dcfbb35cc06c082660955"),
+    productId: "6922c71ac9e0de915584a81a",
+    customerId: "6757c0010000000000000001",
+    customerName: "Nguyễn Văn A",
+    rating: 4,
+    comment: "Tốc độ tốt nhưng nóng, cần lắp thêm heatsink.",
+    createdAt: ISODate("2025-12-01T08:00:00.000Z"),
+    updatedAt: ISODate("2025-12-01T08:00:00.000Z"),
+    __v: 0
+  },
+
+  // --- 4. Kingston Fury Beast 16GB (ID: 6923e94123c33dfcf314142d) ---
+  {
+    _id: ObjectId("692dcfbb35cc06c082660956"),
+    productId: "6923e94123c33dfcf314142d",
+    customerId: "6757c0010000000000000006",
+    customerName: "Vũ Thị F",
+    rating: 5,
+    comment: "RAM thiết kế đẹp, cắm vào main nhận luôn XMP 3200MHz.",
+    createdAt: ISODate("2025-11-30T13:10:00.000Z"),
+    updatedAt: ISODate("2025-11-30T13:10:00.000Z"),
+    __v: 0
+  },
+  {
+    _id: ObjectId("692dcfbb35cc06c082660957"),
+    productId: "6923e94123c33dfcf314142d",
+    customerId: "6757c0010000000000000007",
+    customerName: "Đặng G",
+    rating: 3,
+    comment: "Giao hàng hơi chậm, nhưng RAM dùng ổn định.",
+    createdAt: ISODate("2025-12-02T09:30:00.000Z"),
+    updatedAt: ISODate("2025-12-02T09:30:00.000Z"),
+    __v: 0
+  },
+
+  // --- 5. ASUS Prime B660M-A (ID: 6923e95123c33dfcf314142f) ---
+  {
+    _id: ObjectId("692dcfbb35cc06c082660958"),
+    productId: "6923e95123c33dfcf314142f",
+    customerId: "6757c0010000000000000008",
+    customerName: "Bùi H",
+    rating: 4,
+    comment: "Mainboard đầy đủ cổng kết nối, tản nhiệt VRM tốt cho i5.",
+    createdAt: ISODate("2025-11-29T15:20:00.000Z"),
+    updatedAt: ISODate("2025-11-29T15:20:00.000Z"),
+    __v: 0
+  },
+
+  // --- 6. Cooler Master MWE 650W (ID: 6923e95923c33dfcf3141431) ---
+  {
+    _id: ObjectId("692dcfbb35cc06c082660959"),
+    productId: "6923e95923c33dfcf3141431",
+    customerId: "6757c0010000000000000009",
+    customerName: "Ngô K",
+    rating: 5,
+    comment: "Nguồn chạy êm, dây dẹt màu đen dễ đi dây.",
+    createdAt: ISODate("2025-12-03T10:05:00.000Z"),
+    updatedAt: ISODate("2025-12-03T10:05:00.000Z"),
+    __v: 0
+  }
+];
 
 db.products.drop();
 db.products.insertMany(products);
@@ -1904,5 +2027,7 @@ db.customers.insertMany(customers)
 
 db = db.getSiblingDB("orders")
 db.orders.insertMany(orders)
+
+db.reviews.insertMany(reviews);
 
 print("Products data inserted successfully!");

@@ -442,6 +442,7 @@ exports.getProductById = async (req, res) => {
           _id: c._id,
           name: c.name || "",
           price: c.price || 0,
+          componentType: c.componentType,
         }));
 
       basePC.components = mapComponents(basePC.components);

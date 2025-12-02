@@ -115,6 +115,20 @@ exports.deleteProduct = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+exports.updateRatingInternal = async (req, res) => {
+    const { id } = req.params;
+    const { rating, numReviews } = req.body;
+    
+    try {
+        await Product.findByIdAndUpdate(id, { 
+            rating: rating, 
+            numReviews: numReviews 
+        });
+        res.status(200).json({ message: 'Rating synced' });
+    } catch (err) {
+        res.status(500).json({ error: 'Sync failed' });
+    }
+  }
 function removeVietnameseTones(str) {
   return str
     .normalize("NFD")
