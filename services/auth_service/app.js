@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const axios = require("axios");
 const crypto = require("node:crypto");
 const bcrypt = require("bcrypt");
 const logger = require("morgan");
@@ -33,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "secret_key", 
+    secret: process.env.SESSION_SECRET || "secret_key",
     resave: false,
     saveUninitialized: false,
   })
@@ -42,7 +43,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// --- GOOGLE STRATEGY 
+// --- GOOGLE STRATEGY
 passport.use(
   new GoogleStrategy(
     {
@@ -60,7 +61,7 @@ passport.use(
         if (!userAuth) {
           const user = await User.create({
             email: googleEmail,
-            fullName: profile.displayName, 
+            fullName: profile.displayName,
           });
 
           await AuthProvider.create({
@@ -81,11 +82,8 @@ passport.use(
   )
 );
 
-// Serialize/Deserialize user cho Passport session
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
-
-// --- ROUTES ---
 
 app.get(
   "/oauth/google",
@@ -102,11 +100,24 @@ app.get(
       JWT_LOGIN_SECRET,
       { expiresIn: "1h" }
     );
-    res.status(200).json({ token: authToken });
+    res.redirect(`http://localhost:5173?token=${authToken}&provider=google`);
   }
 );
 
-// Validate Register: Thêm check độ dài password nếu người dùng có nhập
+app.get(
+  "/oauth/googlecallback",
+  passport.authenticate("google", { session: false }),
+  (req, res) => {
+    const user = req.user;
+    const authToken = jwt.sign(
+      { id: user._id, email: user.email, role: user.role },
+      JWT_LOGIN_SECRET,
+      { expiresIn: "1h" }
+    );
+    res.redirect(`http://localhost:5173?token=${authToken}&provider=google`);
+  }
+);
+
 const validateRegister = [
   check("email")
     .trim()
@@ -114,10 +125,6 @@ const validateRegister = [
     .withMessage("Email is required")
     .isEmail()
     .withMessage("Invalid email format"),
-  check("password")
-    .optional()
-    .isLength({ min: 6 })
-    .withMessage("Password must be at least 6 characters"),
 ];
 
 app.post("/register", validateRegister, async (req, res) => {
@@ -127,30 +134,21 @@ app.post("/register", validateRegister, async (req, res) => {
   }
 
   const dryrun = req.query.dryrun;
-  const { email, password, fullName } = req.body; // Nhận thêm fullName và password
 
-  // Kiểm tra trùng email
+  const { email, fullName } = req.body;
+
   if (await User.findOne({ email, password: { $exists: true } })) {
     return res.status(400).json({ error: "This email was used" });
   }
 
-
-  let finalPassword = password;
-  let isGenerated = false;
-
-  if (!finalPassword) {
-    finalPassword = generatePassword(); // Hàm sinh pass ngẫu nhiên
-    isGenerated = true;
-  }
-
+  const finalPassword = generatePassword();
   const hashedPassword = await bcrypt.hash(finalPassword, 10);
   const expiredDate = new Date(Date.now() + EXPIRY * 60 * 1000);
 
-  
   const user = new User({
     email,
     password: hashedPassword,
-    fullName: fullName || "", // Lưu fullName
+    fullName: fullName || "",
     expiredDate,
   });
 
@@ -158,25 +156,31 @@ app.post("/register", validateRegister, async (req, res) => {
     return res.json({ user });
   }
 
-  user
-    .save()
-    .then(() => {
-      if (isGenerated) {
-        // Case 1: Tự sinh pass (User không nhập) -> Trả về pass để hiển thị
-        res
-          .status(201)
-          .json({
-            message: "User created with temporary password",
-            password: finalPassword,
-          });
-      } else {
-        // Case 2: User tự nhập pass -> Không trả lại pass (Bảo mật)
-        res.status(201).json({ message: "User registered successfully" });
-      }
-    })
-    .catch((err) => {
-      res.status(500).json({ error: "Database error: " + err.message });
+  try {
+    await user.save();
+
+    // Send email with temporary password via registration manager
+    const { callbackURL } = req.body;
+    try {
+      await axios.post("http://registration-manager:4000/register", {
+        email,
+        password: finalPassword,
+        callbackURL:
+          callbackURL ||
+          `http://localhost:5000/api/auth/register/callback?email=${email}`,
+      });
+      console.log(`Email sent successfully to ${email}`);
+    } catch (emailErr) {
+      console.error("Failed to send email:", emailErr.message);
+    }
+
+    res.status(201).json({
+      message: "User created with temporary password. Check your email.",
+      password: finalPassword,
     });
+  } catch (err) {
+    res.status(500).json({ error: "Database error: " + err.message });
+  }
 });
 
 app.get("/register/callback", async (req, res) => {
@@ -199,10 +203,6 @@ app.post("/login", async (req, res) => {
   ) {
     return res.status(401).json({ error: "Invalid credentials" });
   }
-  // Tạm comment đoạn check expired để test cho dễ, uncomment nếu cần tính năng verify email
-  /* else if (user && user.expiredDate) {
-        return res.status(401).json({error: "Verify your email"})
-    } */
 
   const authToken = jwt.sign(
     { id: user._id, email: user.email, role: user.role || "customer" },
