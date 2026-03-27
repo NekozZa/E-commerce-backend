@@ -1,58 +1,101 @@
 services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - api-gateway
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  
   api-gateway:
-    build: ./api
+    build: ./E-commerce-backend/api
     ports:
       - "5000:5000"
     env_file:
-      - ./api/.env
+      - ./E-commerce-backend/api/.env
+    depends_on:
+      - auth-service
+      - customer-service
+      - product-service
+      - order-service
+    networks:
+      - app-network
+    restart: unless-stopped
 
+  
   auth-service:
-    build: ./services/auth_service
+    build: ./E-commerce-backend/services/auth_service
     ports:
       - "3000:3000"
     env_file:
-      - ./services/auth_service/.env
+      - ./E-commerce-backend/services/auth_service/.env
     depends_on:
       - mongo
+    networks:
+      - app-network
+    restart: unless-stopped
 
+ 
   customer-service:
-    build: ./services/customer_service
+    build: ./E-commerce-backend/services/customer_service
     ports:
       - "3001:3000"
     env_file:
-      - ./services/customer_service/.env
+      - ./E-commerce-backend/services/customer_service/.env
     depends_on:
       - mongo
+    networks:
+      - app-network
+    restart: unless-stopped
 
+  
   coupon-service:
-    build: ./services/coupon_service
+    build: ./E-commerce-backend/services/coupon_service
     ports:
       - "3002:3000"
     env_file:
-      - ./services/coupon_service/.env
+      - ./E-commerce-backend/services/coupon_service/.env
     depends_on:
       - mongo
+    networks:
+      - app-network
+    restart: unless-stopped
 
+  
   email-service:
-    build: ./services/email_service
+    build: ./E-commerce-backend/services/email_service
     ports:
       - "3003:3000"
     env_file:
-      - ./services/email_service/.env
+      - ./E-commerce-backend/services/email_service/.env
     depends_on:
       - mongo
+    networks:
+      - app-network
+    restart: unless-stopped
 
   order-service:
-    build: ./services/order_service
+    build: ./E-commerce-backend/services/order_service
     ports:
       - "3005:3000"
     env_file:
-      - ./services/order_service/.env
+      - ./E-commerce-backend/services/order_service/.env
     depends_on:
       - mongo
+    networks:
+      - app-network
+    restart: unless-stopped
 
+ 
   product-service:
-    build: ./services/product_service
+    build: ./E-commerce-backend/services/product_service
     ports:
       - "3006:3000"
     environment:
@@ -61,11 +104,13 @@ services:
       - MONGO_URI=mongodb://root:example@mongo:27017/products?authSource=admin
     depends_on:
       - mongo
+    networks:
+      - app-network
     restart: unless-stopped
-    
+
 
   review-service:
-    build: ./services/review_service
+    build: ./E-commerce-backend/services/review_service
     ports:
       - "3007:3000"
     environment:
@@ -74,39 +119,53 @@ services:
       - MONGO_URI=mongodb://root:example@mongo:27017/review?authSource=admin
     depends_on:
       - mongo
+    networks:
+      - app-network
     restart: unless-stopped
 
-
+  
   registration-manager:
-    build: ./managers/registration_manager
+    build: ./E-commerce-backend/managers/registration_manager
     ports:
       - "4000:4000"
     env_file:
-      - ./managers/registration_manager/.env
+      - ./E-commerce-backend/managers/registration_manager/.env
+    depends_on:
+      - auth-service
+      - email-service
+    networks:
+      - app-network
+    restart: unless-stopped
+
 
   checkout-manager:
-    build: ./managers/checkout_manager
+    build: ./E-commerce-backend/managers/checkout_manager
     ports:
       - "4001:4000"
     env_file:
-      - ./managers/checkout_manager/.env
-
-  ngrok:
-    image: ngrok/ngrok:latest
-    command: http checkout-manager:4000
-    ports:
-      - "4040:4040"
-    environment:
-      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+      - ./E-commerce-backend/managers/checkout_manager/.env
     depends_on:
-      - checkout-manager
+      - order-service
+      - customer-service
+      - product-service
+    networks:
+      - app-network
+    restart: unless-stopped
 
+ 
   product-analysis-manager:
-    build: ./managers/product_analysis_manager
+    build: ./E-commerce-backend/managers/product_analysis_manager
     ports:
       - "4002:4000"
     env_file:
-      - ./managers/product_analysis_manager/.env
+      - ./E-commerce-backend/managers/product_analysis_manager/.env
+    depends_on:
+      - product-service
+      - order-service
+    networks:
+      - app-network
+    restart: unless-stopped
+
 
   mongo:
     image: mongo:7
@@ -118,18 +177,43 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
-      - ./mongo-init-scripts:/docker-entrypoint-initdb.d
+      - ./E-commerce-backend/mongo-init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
 
   mongo-express:
     image: mongo-express
     restart: always
     ports:
-      - 8081:8081
+      - "8081:8081"
     environment:
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/?authSource=admin
       ME_CONFIG_BASICAUTH_ENABLED: true
       ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
       ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass
-    
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
+  #
+  ngrok:
+    image: ngrok/ngrok:latest
+    command: http checkout-manager:4000
+    ports:
+      - "4040:4040"
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    depends_on:
+      - checkout-manager
+    networks:
+      - app-network
+    profiles:
+      - with-ngrok
+
+networks:
+  app-network:
+    driver: bridge
+
 volumes:
   mongo_data:
